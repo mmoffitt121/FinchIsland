@@ -1,0 +1,2 @@
+Once we have all the models for the islane (need some sort of barrier), we should move the script to the paret of the island.
+I AM ASSUMING WE ARE MAKING MORE MODELS FOR THE ISLAND AND THAT THE ISLAND IS NOT JUST ONE FLAT LAND
