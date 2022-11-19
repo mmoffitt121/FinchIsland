@@ -143,12 +143,12 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 39c1b302ec212db439b0b82d491080c0,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -8.3
+      value: 1.4
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 39c1b302ec212db439b0b82d491080c0,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 39c1b302ec212db439b0b82d491080c0,
         type: 3}
@@ -579,7 +579,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 9a11ef40a3cfab5409465c79e7974e73,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 37.12
+      value: 32.64
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 9a11ef40a3cfab5409465c79e7974e73,
         type: 3}
@@ -633,8 +633,14 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 27ac0fa0ad010794fa2b630437d93ae9, type: 2}
     - target: {fileID: 919132149155446097, guid: 9a11ef40a3cfab5409465c79e7974e73,
         type: 3}
+      propertyPath: m_Icon
+      value: 
+      objectReference: {fileID: 419385456094870383, guid: 0000000000000000d000000000000000,
+        type: 0}
+    - target: {fileID: 919132149155446097, guid: 9a11ef40a3cfab5409465c79e7974e73,
+        type: 3}
       propertyPath: m_Name
-      value: finch
+      value: Gerald
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9a11ef40a3cfab5409465c79e7974e73, type: 3}
@@ -762,19 +768,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f0053a072300f4a499e06ba1522ec018, type: 3}
---- !u!65 &1283823600
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 672221694}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 0
-  serializedVersion: 2
-  m_Size: {x: 0.22, y: 0.22192103, z: 0.07689766}
-  m_Center: {x: -0.000000063520595, y: -6.490395e-17, z: 0.040358335}
 --- !u!114 &1283823603
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -841,7 +834,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BrainParameters:
-    VectorObservationSize: 10
+    VectorObservationSize: 0
     NumStackedVectorObservations: 1
     m_ActionSpec:
       m_NumContinuousActions: 5

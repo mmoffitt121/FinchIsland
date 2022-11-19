@@ -7,13 +7,13 @@ using Unity.MLAgents.Actuators;
 public class Birdbrain : Agent
 {
     [Tooltip("How fast the boi is going")]
-    public float moveForce = 2f;
+    public float moveForce = 40f;
 
     [Tooltip("How fast the boi is tilting")]
-    public float pitchSpeed = 2f;
+    public float pitchSpeed = 40f;
 
     [Tooltip("Speed to rotate around the up axis")]
-    public float yAxisSpeesd = 2f;
+    public float yAxisSpeesd = 40f;
 
     [Tooltip("Agents Camera")]
     public Camera agentCamera;
@@ -106,20 +106,20 @@ public class Birdbrain : Agent
         float yaw = 0f;
 
         // Forward/backward
-        if (Input.GetKey(KeyCode.W)) forward = transform.forward;
-        else if (Input.GetKey(KeyCode.S)) forward = -transform.forward;
+        if (Input.GetKey(KeyCode.UpArrow)) forward = transform.forward;
+        else if (Input.GetKey(KeyCode.DownArrow)) forward = -transform.forward;
 
         // Left/right
-        if (Input.GetKey(KeyCode.A)) left = transform.right;
-        else if (Input.GetKey(KeyCode.D)) left = -transform.right;
+        if (Input.GetKey(KeyCode.S)) left = transform.right;
+        else if (Input.GetKey(KeyCode.W)) left = -transform.right;
 
         // Up/down
-        if (Input.GetKey(KeyCode.E)) up = transform.up;
-        else if (Input.GetKey(KeyCode.C)) up = -transform.up;
+        if (Input.GetKey(KeyCode.A)) up = transform.up;
+        else if (Input.GetKey(KeyCode.D)) up = -transform.up;
 
         // Pitch up/down
-        if (Input.GetKey(KeyCode.UpArrow)) pitch = 1f;
-        else if (Input.GetKey(KeyCode.DownArrow)) pitch = -1f;
+        if (Input.GetKey(KeyCode.E)) pitch = 1f;
+        else if (Input.GetKey(KeyCode.C)) pitch = -1f;
 
         // Turn left/right
         if (Input.GetKey(KeyCode.LeftArrow)) yaw = -1f;
@@ -137,33 +137,40 @@ public class Birdbrain : Agent
     //freeze unfreeze
     public void FreezeAgent()
     {
+        Debug.Assert(trainingMode == false, "Freeze/Unfreeze not supported in training");
         frozen = true;
         rigidbody.Sleep();
     }
 
-//    public void unFreezeAgent()
-//    {
-//        frozen = true;
-//        rigidbody.WakeUp();
-//    }
+    public void UnFreezeAgent()
+    {
+        Debug.Assert(trainingMode == false, "Freeze/Unfreeze not supported in training");
+        frozen = true;
+        rigidbody.WakeUp();
+    }
 
-//    //colliding on stuff
-//    private void OnTriggerEnter(Collider other)
-//    {
-//        TriggerEnterOrStay(other);
-//    }
+    //colliding on stuff
+    private void OnTriggerEnter(Collider other)
+    {
+        TriggerEnterOrStay(other);
+    }
 
-//    private void OnTriggerStay(Collider other)
-//    {
-//        TriggerEnterOrStay(other);
-//    }
+    private void OnTriggerStay(Collider other)
+    {
+        TriggerEnterOrStay(other);
+    }
 
-//    private void TriggerEnterOrStay(Collider collider)
-//    {
-//        //this is where we start to give rewards IF I HAD SOME
-//    }
-
-
+    private void TriggerEnterOrStay(Collider collider)
+    {
+        Rock rock = islandArea.gettingPebbles(collider);
+        float food = rock.Feed(.01f);    }
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(trainingMode && collision.collider.CompareTag("boundary"))
+        {
+            AddReward(-.5f);
+        }
+    }
 }
 
 
