@@ -34,4 +34,4 @@ This is a bit tricker.
 ### Step 1
 Follow the instructions at [this link](https://www.immersivelimit.com/tutorials/unity-ml-agents-setup). This will help you setup Unity's MLAgents repository, and help you get to know MLAgents. Do the [second part too](https://www.immersivelimit.com/tutorials/ml-agents-python-setup-anaconda).
 
-If you find issues, make sure you're using Python 3.7.9 64-bit.
+Make sure you're using Python 3.7.9 64-bit.
