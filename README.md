@@ -27,5 +27,11 @@ Click the Play Icon at the top, and you'll be able to see how the project plays 
 ### Step 4
 Get Visual Studio working with Unity. Guide [here](https://learn.microsoft.com/en-us/visualstudio/gamedev/unity/get-started/getting-started-with-visual-studio-tools-for-unity?pivots=windows).
 
-Make sure that your visual studio is autocompleting Unity classes/functions for you. This will make development a lot easier.
+Make sure that double-clicking scripts in the project window opens the scripts in VS, and that your VS is autocompleting Unity classes/functions for you. This will make development a lot easier.
 ## For AI Development
+This is a bit tricker. 
+
+### Step 1
+Follow the instructions at [this link](https://www.immersivelimit.com/tutorials/unity-ml-agents-setup). This will help you setup Unity's MLAgents repository, and help you get to know MLAgents. Do the [second part too](https://www.immersivelimit.com/tutorials/ml-agents-python-setup-anaconda).
+
+If you find issues, make sure you're using Python 3.7.9 64-bit version. This is important.
