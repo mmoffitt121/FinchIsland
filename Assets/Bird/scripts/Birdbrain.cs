@@ -163,7 +163,8 @@ public class Birdbrain : Agent
     private void TriggerEnterOrStay(Collider collider)
     {
         Rock rock = islandArea.gettingPebbles(collider);
-        float food = rock.Feed(.01f);    }
+        _ = rock.Feed(.01f);
+    }
     private void OnCollisionEnter(Collision collision)
     {
         if(trainingMode && collision.collider.CompareTag("boundary"))
