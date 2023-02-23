@@ -12,7 +12,7 @@ using UnityEngine;
 public class MainBrainFrame : MonoBehaviour
 {
 
-}
+}/*
 
 /// <summary>
 /// Making the bird move using values from the other area
@@ -21,4 +21,4 @@ public class MainBrainFrame : MonoBehaviour
 public override void Heuristic(in ActionBuffers actionsOut)
 {
 
-}
+}*/
