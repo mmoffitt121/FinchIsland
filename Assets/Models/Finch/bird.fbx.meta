@@ -1,11 +1,14 @@
 fileFormatVersion: 2
-guid: 2054d3edb06d02b409829db18170656c
+guid: 66b4e8b404fa2c64181936bece3d0778
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable:
   - first:
-      74: -623603649343465320
-    second: Scene
+      74: 4781951162920444690
+    second: Armature|ArmatureAction
+  - first:
+      74: 5154044263299310189
+    second: Armature|FlyIdle
   externalObjects: {}
   materials:
     materialImportMode: 2
@@ -26,7 +29,7 @@ ModelImporter:
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
-    importConstraints: 1
+    importConstraints: 0
     animationCompression: 1
     animationRotationError: 0.5
     animationPositionError: 0.5
@@ -71,8 +74,8 @@ ModelImporter:
     secondaryUVPackMargin: 4
     useFileScale: 1
   tangentSpace:
-    normalSmoothAngle: 110
-    normalImportMode: 1
+    normalSmoothAngle: 60
+    normalImportMode: 0
     tangentImportMode: 3
     normalCalculationMode: 4
     legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
