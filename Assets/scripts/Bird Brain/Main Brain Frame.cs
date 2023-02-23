@@ -11,9 +11,9 @@ using UnityEngine;
 /// </summary>
 public class MainBrainFrame : Agent
 {
-    
+
     public float moveForce = 2f;
-    
+
     public float pitchSpeed = 100f;
 
     public float yawSpeed = 100f;
@@ -34,7 +34,7 @@ public class MainBrainFrame : Agent
 
         //Forward and back
         if (Input.GetKey(KeyCode.W)) forward = transform.forward;
-        else  if (Input.GetKey(KeyCode.S)) forward = -transform.forward;
+        else if (Input.GetKey(KeyCode.S)) forward = -transform.forward;
 
         //left/right
 
@@ -62,17 +62,4 @@ public class MainBrainFrame : Agent
         continousActionsOut[4] = yaw;
 
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
 }
