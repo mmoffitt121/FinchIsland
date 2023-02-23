@@ -6,5 +6,6 @@ using UnityEngine;
 public class LessonNode
 {
     public string name;
-    public LessonNode[] outputs;
+    public int id;
+    public int[] outputs;
 }
