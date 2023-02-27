@@ -10,8 +10,13 @@ public class LessonPlanUI : MonoBehaviour
     {
         GameObject lp = Instantiate(lessonPlanPrefab);
         lp.transform.SetParent(lessonPlanList.transform, false);
-    }
 
+    }
+    public void DeleteLessonPlan() 
+    {
+        Destroy(this.gameObject);
+
+    }
     public void EditLessonPlan(LessonPlan lp)
     {
 
