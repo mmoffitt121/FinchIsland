@@ -18,6 +18,57 @@ public class MainBrainFrame : Agent
 
     public float yawSpeed = 100f;
 
+    private float smoothPitchChange = 0f;
+
+    private float smoothYawChange = 0f;
+
+    private const float beakAngle = 80f;
+
+    public Camera geraldPOV;
+
+    public bool Tetsing;
+
+    new private Rigidbody rigidbody;
+
+    private bool frozen = false;
+
+    public override void Initialize()
+    {
+        rigidbody = GetComponent<Rigidbody>();
+
+        if (!Tetsing) MaxStep = 0;
+    }
+
+    public override void OnEpisodeBegin()
+    {
+        rigidbody.velocity = Vector3.zero;
+        rigidbody.angularVelocity = Vector3.zero;
+    }
+
+    public override void OnActionReceived(ActionBuffers actions)
+    {
+        if (frozen) return;
+
+        Vector3 move = new Vector3(actions.ContinuousActions[0], actions.ContinuousActions[1], actions.ContinuousActions[2]);
+
+        rigidbody.AddForce(move * moveForce);
+
+        Vector3 rotationVector = transform.rotation.eulerAngles;
+
+        float pitchChange = actions.ContinuousActions[3];
+        float yawChange = actions.ContinuousActions[4];
+
+        smoothPitchChange = Mathf.MoveTowards(smoothPitchChange, pitchChange, 2f * Time.fixedDeltaTime);
+        smoothYawChange = Mathf.MoveTowards(smoothYawChange, yawChange, 2f * Time.fixedDeltaTime);
+
+        float pitch = rotationVector.x + smoothPitchChange * Time.fixedDeltaTime * pitchSpeed;
+        if (pitch > 180f) pitch -= 360f;
+
+        float yaw = rotationVector.y + smoothYawChange * Time.fixedDeltaTime * yawSpeed;
+
+        transform.rotation = Quaternion.Euler(pitch, yaw, 0f);
+    }
+
 
     /// <summary>
     /// making the bird move
@@ -62,4 +113,18 @@ public class MainBrainFrame : Agent
         continousActionsOut[4] = yaw;
 
     }
+
+    public void FreezeAgent()
+    {
+        frozen = true;
+        rigidbody.Sleep();
+    }
+    public void Unfreeze()
+    {
+        frozen = false;
+        rigidbody.WakeUp();
+    }
+
+   
+
 }
