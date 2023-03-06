@@ -1,0 +1,19 @@
+Gerald Flight Training Guide 101
+
+1) Make sure you put Gerald in the scene, we need him
+2) Attach a camera to gerald, make sure the rotation is ay x=0, y=180, z = 0. For some reason gerald is backwards (Thanks Matt)
+3) Attach a rigidbody to gerald. This is so he can have some sort of resistance while flying. Mass = 1, Drag = 2, Angular Drag = .5
+4) On the rigidbody, take off gravity and make sure the collision detection is discrete
+5) Attatch the Main Brain Frame script. Give hime like 5000 steps or something (Max steps)
+6) Should automatically have all the forces and speeds but just in case:
+	Move force = 2
+	Pitch/yaw speed = 100
+7) Attach the camera you created in step 2 to the script under Gerald POV
+8) Add a behavior parameter, Make sure the behavior name is bird.
+9) Vector Observation set to 10, Continuous Actions to 5, and discrete branches to 0
+10) Set Inference decive to CPU and Behavior type to Heuristics only.
+11) Make sure in the Script that testing is checked off, or else it wont work.
+
+PLEASE DONT CRASH HIM PLEASE DONT CRASH HIM PLEASE DONT CRASH HIM PLEASE DONT CRASH HIM
+
+Good luck future pilots :) 
