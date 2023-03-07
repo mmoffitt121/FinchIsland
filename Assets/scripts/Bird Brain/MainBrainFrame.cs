@@ -84,13 +84,13 @@ public class MainBrainFrame : Agent
         float yaw = 0f;
 
         //Forward and back
-        if (Input.GetKey(KeyCode.W)) forward = transform.forward;
-        else if (Input.GetKey(KeyCode.S)) forward = -transform.forward;
+        if (Input.GetKey(KeyCode.W)) forward = -transform.forward;
+        else if (Input.GetKey(KeyCode.S)) forward = transform.forward;
 
         //left/right
 
-        if (Input.GetKey(KeyCode.A)) left = -transform.right;
-        else if (Input.GetKey(KeyCode.D)) left = transform.right;
+        if (Input.GetKey(KeyCode.A)) left = transform.right;
+        else if (Input.GetKey(KeyCode.D)) left = -transform.right;
 
         //Up/Down
         if (Input.GetKey(KeyCode.E)) up = transform.up;
