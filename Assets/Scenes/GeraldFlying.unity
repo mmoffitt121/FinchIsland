@@ -549,7 +549,7 @@ MonoBehaviour:
   pitchSpeed: 100
   yawSpeed: 100
   geraldPOV: {fileID: 551203143}
-  Testing: 0
+  Testing: 1
 --- !u!114 &984309236
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -563,7 +563,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BrainParameters:
-    VectorObservationSize: 10
+    VectorObservationSize: 0
     NumStackedVectorObservations: 1
     m_ActionSpec:
       m_NumContinuousActions: 5
@@ -758,7 +758,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 1.2, y: 1.2, z: 1.2}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &2102617310
 MeshRenderer:
@@ -837,3 +837,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9ff47e0e298f854181a79201ccfe43b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  food: {fileID: 2102617309}
