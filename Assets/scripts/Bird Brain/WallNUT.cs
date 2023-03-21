@@ -72,7 +72,7 @@ public class WallNUT : MonoBehaviour
         foodMaterial = meshRenderer.material;
 
         //finding wallnut collider
-        food = transform.Find("tempFood").GetComponent<Collider>();
+        food = transform.Find("TempFood").GetComponent<Collider>();
     }
 
 
