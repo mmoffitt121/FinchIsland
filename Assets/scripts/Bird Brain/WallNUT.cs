@@ -5,7 +5,7 @@ using UnityEngine;
 public class WallNUT : MonoBehaviour
 {
     public Collider food;
-    private Material foodMaterial;
+    public Material foodMaterial;
 
     //Start of finding food?
 
@@ -40,7 +40,7 @@ public class WallNUT : MonoBehaviour
     {
         float eaten = Mathf.Clamp(amount, 0f, amount);
         checkNut -= amount;
-        if(checkNut <= 0f)
+        if(checkNut <= 0)
         {
             checkNut = 0;
 
@@ -55,7 +55,7 @@ public class WallNUT : MonoBehaviour
         return eaten;
     }
 
-    public void resetNut()
+    public void ResetNut()
     {
         checkNut = 1f;
 

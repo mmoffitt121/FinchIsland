@@ -13,11 +13,14 @@ public class MainBrainFrame : Agent {
     public float yawSpeed = 100f;
     private float smoothPitchChange = 0f;
     private float smoothYawChange = 0f;
-    private const float beakAngle = 80f;
+    //we are using the whole bird. Need to add a beak collider
+   // private const float beakAngle = 80f;
     public Camera geraldPOV;
     public bool Testing;
     new private Rigidbody rigidbody;
     private bool frozen = false;
+
+    public float checkNut { get; private set; }
 
     public override void Initialize() {
         rigidbody = GetComponent<Rigidbody>();
@@ -27,6 +30,8 @@ public class MainBrainFrame : Agent {
     }
 
     public override void OnEpisodeBegin() {
+
+        checkNut = 0f;
         rigidbody.velocity = Vector3.zero;
         rigidbody.angularVelocity = Vector3.zero;
     }
@@ -101,6 +106,36 @@ public class MainBrainFrame : Agent {
     public void Unfreeze() {
         frozen = false;
         rigidbody.WakeUp();
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        TriggerEnterOrStay(other);
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        TriggerEnterOrStay(other);
+
+    }
+
+    private void TriggerEnterOrStay(Collider collider)
+    {
+        //Check if colliding with nut
+        if (collider.CompareTag("food"))
+        {
+            //start the feeding
+            print("feeding");
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(Testing && collision.collider.CompareTag("boundary"))
+        {
+            //Need to add reward system
+            print("remove reward");
+        }
     }
 }
 

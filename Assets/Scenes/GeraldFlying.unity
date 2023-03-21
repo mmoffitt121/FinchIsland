@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.20632462, g: 0.42319024, b: 0.5811555, a: 1}
+  m_IndirectSpecularColor: {r: 0.2063128, g: 0.42321017, b: 0.5811635, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -136,7 +136,7 @@ GameObject:
   - component: {fileID: 79772049}
   m_Layer: 0
   m_Name: Terrain
-  m_TagString: Untagged
+  m_TagString: boundary
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -782,7 +782,7 @@ GameObject:
   - component: {fileID: 2102617313}
   m_Layer: 0
   m_Name: TempFood
-  m_TagString: Untagged
+  m_TagString: food
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -795,7 +795,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2102617308}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1.2, y: 1.2, z: 1.2}
@@ -878,3 +878,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   food: {fileID: 2102617309}
+  foodMaterial: {fileID: 0}
