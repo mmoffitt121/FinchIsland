@@ -103,3 +103,5 @@ public class MainBrainFrame : Agent {
         rigidbody.WakeUp();
     }
 }
+
+//Collecting Bird Vision
