@@ -1,0 +1,6 @@
+How to finish Gerald:
+
+1) We need a reward system, just some values associated to both the food and the boundaries of the world. 
+2) Vector Observations, need to implement his field of view, this is useful for crashing gerald into objects and him suffering
+3) Gerald starvation and generation, Need to keep track of both his food meter and how fast he needs to eat.
+4) 
