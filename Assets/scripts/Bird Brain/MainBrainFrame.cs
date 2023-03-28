@@ -110,6 +110,7 @@ public class MainBrainFrame : Agent {
 
     private void OnTriggerEnter(Collider other)
     {
+
         TriggerEnterOrStay(other);
     }
 
@@ -121,11 +122,14 @@ public class MainBrainFrame : Agent {
 
     private void TriggerEnterOrStay(Collider collider)
     {
-        //Check if colliding with nut
+        //Check if colliding with nut, Continues because of Trigger.
+        
         if (collider.CompareTag("food"))
         {
             //start the feeding
             print("feeding");
+            AddReward(.1f);
+            Debug.Log(GetCumulativeReward());
         }
     }
 
@@ -135,6 +139,7 @@ public class MainBrainFrame : Agent {
         {
             //Need to add reward system
             print("remove reward");
+            AddReward(-.5f);
         }
     }
 }
