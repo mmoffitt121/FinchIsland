@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class WallNUT : MonoBehaviour
 {
-    public Collider food;
+    [HideInInspector]
+    public Collider foodCollider;
+    public Collider foodBlocker;
     public Material foodMaterial;
 
     //Start of finding food?
@@ -13,7 +15,7 @@ public class WallNUT : MonoBehaviour
     {
         get
         {
-            return food.transform.up;
+            return foodCollider.transform.up;
         }
     }
 
@@ -21,7 +23,7 @@ public class WallNUT : MonoBehaviour
     {
         get
         {
-            return food.transform.position;
+            return foodCollider.transform.position;
         }
     }
 
@@ -38,14 +40,14 @@ public class WallNUT : MonoBehaviour
 
     public float Feed(float amount)
     {
-        float eaten = Mathf.Clamp(amount, 0f, amount);
+        float eaten = Mathf.Clamp(amount, 0f, checkNut);
         checkNut -= amount;
         if(checkNut <= 0)
         {
             checkNut = 0;
 
             //Disable collider eventually
-            food.gameObject.SetActive(false);
+            foodCollider.gameObject.SetActive(false);
 
 
             //printing to see if eaten
@@ -60,7 +62,7 @@ public class WallNUT : MonoBehaviour
         checkNut = 1f;
 
         //enable collider eventually
-        food.gameObject.SetActive(true);
+        foodCollider.gameObject.SetActive(true);
 
         print("food is full");
     }
@@ -72,8 +74,9 @@ public class WallNUT : MonoBehaviour
         foodMaterial = meshRenderer.material;
 
         //finding wallnut collider
-        food = transform.Find("TempFood").GetComponent<Collider>();
+        foodCollider = transform.Find("foodCollider").GetComponent<Collider>();
+        foodBlocker = transform.Find("foodBlocker").GetComponent<Collider>();
+
+
     }
-
-
 }

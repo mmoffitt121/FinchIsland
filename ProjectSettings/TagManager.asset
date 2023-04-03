@@ -6,6 +6,7 @@ TagManager:
   tags:
   - food
   - boundary
+  - foodB
   layers:
   - Default
   - TransparentFX

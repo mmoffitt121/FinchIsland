@@ -11,31 +11,56 @@ public class MainBrainFrame : Agent {
     public float moveForce = 2f;
     public float pitchSpeed = 100f;
     public float yawSpeed = 100f;
+
+    public Transform beakTip;
+
     private float smoothPitchChange = 0f;
     private float smoothYawChange = 0f;
+    private const float MaxPitchAngle = 80f;
+    private const float BeakTipRadius = 0.05f;
     //we are using the whole bird. Need to add a beak collider
-   // private const float beakAngle = 80f;
+    // private const float beakAngle = 80f;
     public Camera geraldPOV;
     public bool Testing;
     new private Rigidbody rigidbody;
+
+    private MainIslandArea islandArea;
+    private WallNUT nearestNut;
+
     private bool frozen = false;
 
     public float checkNut { get; private set; }
 
     public override void Initialize() {
         rigidbody = GetComponent<Rigidbody>();
+        islandArea = GetComponentInParent<MainIslandArea>();
+
         if (!Testing) {
             MaxStep = 0;
         }
     }
 
     public override void OnEpisodeBegin() {
+        if (Testing)
+        {
+            islandArea.ResetNut();
+        }
 
         checkNut = 0f;
         rigidbody.velocity = Vector3.zero;
         rigidbody.angularVelocity = Vector3.zero;
+
+        bool inFrontOfNut = true;
+        if (Testing)
+        {
+            inFrontOfNut = UnityEngine.Random.value > .5f;
+        }
+
+        MoveToSafeRandomPosition(inFrontOfNut);
+        UpdateNearestNut();
     }
 
+   
     public override void OnActionReceived(ActionBuffers actions) {
         if (frozen) {
             return;
@@ -53,9 +78,24 @@ public class MainBrainFrame : Agent {
         if (pitch > 180f) {
             pitch -= 360f;
         }
-
+        pitch = Mathf.Clamp(pitch, -MaxPitchAngle, MaxPitchAngle);
         float yaw = rotationVector.y + smoothYawChange * Time.fixedDeltaTime * yawSpeed;
         transform.rotation = Quaternion.Euler(pitch, yaw, 0f);
+    }
+
+    public override void CollectObservations(VectorSensor sensor)
+    {
+        if (nearestNut == null)
+        {
+            sensor.AddObservation(new float[10]);
+            return;
+        }
+        sensor.AddObservation(transform.localRotation.normalized);
+        Vector3 toNut = nearestNut.foodCenter - beakTip.position;
+        sensor.AddObservation(toNut.normalized);
+        sensor.AddObservation(Vector3.Dot(toNut.normalized, -nearestNut.foodVectorUP.normalized));
+        sensor.AddObservation(Vector3.Dot(beakTip.forward.normalized, -nearestNut.foodVectorUP.normalized));
+        sensor.AddObservation(toNut.magnitude / MainIslandArea.AreaDiameter);
     }
 
     /// Make the bird move
@@ -108,6 +148,68 @@ public class MainBrainFrame : Agent {
         rigidbody.WakeUp();
     }
 
+    private void MoveToSafeRandomPosition(bool inFrontOfNut)
+    {
+        bool safePositionFound = false;
+        int attemps = 100;
+        Vector3 potentialPosition = Vector3.zero;
+        Quaternion potentialRotation = new Quaternion();
+
+        while(!safePositionFound && attemps > 0)
+        {
+            attemps--;
+            if (inFrontOfNut)
+            {
+                WallNUT randomnut = islandArea.Wallnuts[UnityEngine.Random.Range(0, islandArea.Wallnuts.Count)];
+
+                float distanceFromNut = UnityEngine.Random.Range(.1f, .2f);
+                potentialPosition = randomnut.transform.position + randomnut.foodVectorUP * distanceFromNut;
+
+                Vector3 tonut = randomnut.foodCenter - potentialPosition;
+                potentialRotation = Quaternion.LookRotation(tonut, Vector3.up);
+            }
+            else
+            {
+                float height = UnityEngine.Random.Range(1.2f, 2.5f);
+
+                float radius = UnityEngine.Random.Range(2f, 7f);
+
+                Quaternion direction = Quaternion.Euler(0f, UnityEngine.Random.Range(-180f, 180f), 0f);
+
+                potentialPosition = islandArea.transform.position + Vector3.up * height + direction * Vector3.forward * radius;
+
+                float pitch = UnityEngine.Random.Range(-60f, 60f);
+                float yaw = UnityEngine.Random.Range(-180f, 180f);
+                potentialRotation = Quaternion.Euler(pitch, yaw, 0f);
+            }
+
+            Collider[] colliders = Physics.OverlapSphere(potentialPosition, 0.05f);
+            safePositionFound = colliders.Length == 0f;
+        }
+        transform.position = potentialPosition;
+        transform.rotation = potentialRotation;
+    }
+
+    private void UpdateNearestNut()
+    {
+        foreach (WallNUT wallnut in islandArea.Wallnuts)
+        {
+            if (nearestNut == null && wallnut.AmountinWalnut)
+            {
+                nearestNut = wallnut;
+            }
+            else if (wallnut.AmountinWalnut)
+            {
+                float distanceToNut = Vector3.Distance(wallnut.transform.position, beakTip.position);
+                float distCurrent = Vector3.Distance(nearestNut.transform.position, beakTip.position);
+
+                if(!nearestNut.AmountinWalnut || distanceToNut < distCurrent)
+                {
+                    nearestNut = wallnut;
+                }
+            }
+        }
+    }
     private void OnTriggerEnter(Collider other)
     {
 
@@ -126,10 +228,31 @@ public class MainBrainFrame : Agent {
         
         if (collider.CompareTag("food"))
         {
-            //start the feeding
-            print("feeding");
-            AddReward(.1f);
-            Debug.Log(GetCumulativeReward());
+           
+            Vector3 closestPointToBeakTip = collider.ClosestPoint(beakTip.position);
+
+           if(Vector3.Distance(beakTip.position, closestPointToBeakTip) < BeakTipRadius)
+            {
+                WallNUT wallnut = islandArea.GetFood(collider);
+                float eaten = wallnut.Feed(.01f);
+           
+
+                checkNut += eaten;
+
+                if (Testing)
+                {
+                    float bonus = .02f * Mathf.Clamp01(Vector3.Dot(transform.forward.normalized, -nearestNut.foodVectorUP.normalized));
+                    AddReward(.01f + bonus);
+                    print("add reward");
+                }
+
+                if (!wallnut.AmountinWalnut)
+                {
+                    UpdateNearestNut();
+                }
+                
+            }
+
         }
     }
 
@@ -142,6 +265,24 @@ public class MainBrainFrame : Agent {
             AddReward(-.5f);
         }
     }
+
+    private void Update()
+    {
+        if(nearestNut != null)
+        {
+            Debug.DrawLine(beakTip.position, nearestNut.foodCenter, Color.green);
+        }
+    }
+
+    private void FixedUpdate()
+    {
+        if(nearestNut != null && !nearestNut.AmountinWalnut)
+        {
+            UpdateNearestNut();
+        }
+    }
 }
 
-//Collecting Bird Vision
+
+
+
