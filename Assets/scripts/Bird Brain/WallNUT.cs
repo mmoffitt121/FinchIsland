@@ -75,7 +75,7 @@ public class WallNUT : MonoBehaviour
 
         //finding wallnut collider
         foodCollider = transform.Find("foodCollider").GetComponent<Collider>();
-        foodBlocker = transform.Find("foodBlocker").GetComponent<Collider>();
+        //foodBlocker = transform.Find("foodBlocker").GetComponent<Collider>();
 
 
     }
