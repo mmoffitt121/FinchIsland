@@ -8,7 +8,7 @@ public class LessonPlanWrapper : MonoBehaviour
 
     public void DeleteLessonPlan()
     {
-
+        Destroy(this.gameObject);
     }
 
     public void EditLessonPlan()
