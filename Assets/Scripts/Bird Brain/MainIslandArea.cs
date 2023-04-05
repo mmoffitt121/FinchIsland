@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MainIslandArea : MonoBehaviour
 {
-    public const float AreaDiameter = 20f;
+    public const float AreaDiameter = 5f;
 
     //list of all nuts in area with dictionary
     private List<GameObject> nuts;

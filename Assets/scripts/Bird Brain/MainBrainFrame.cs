@@ -172,7 +172,7 @@ public class MainBrainFrame : Agent {
             {
                 float height = UnityEngine.Random.Range(1.2f, 2.5f);
 
-                float radius = UnityEngine.Random.Range(2f, 7f);
+                float radius = UnityEngine.Random.Range(2f, 3f);
 
                 Quaternion direction = Quaternion.Euler(0f, UnityEngine.Random.Range(-180f, 180f), 0f);
 
@@ -180,7 +180,7 @@ public class MainBrainFrame : Agent {
 
                 float pitch = UnityEngine.Random.Range(-60f, 60f);
                 float yaw = UnityEngine.Random.Range(-180f, 180f);
-                potentialRotation = Quaternion.Euler(pitch, yaw, 0f);
+                potentialRotation = Quaternion.Euler(pitch/2, yaw/2, 0f);
             }
 
             Collider[] colliders = Physics.OverlapSphere(potentialPosition, 0.05f);
