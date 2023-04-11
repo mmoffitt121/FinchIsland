@@ -41,8 +41,7 @@ public class MainBrainFrame : Agent {
     }
 
     public override void OnEpisodeBegin() {
-        if (Testing)
-        {
+        if (Testing) {
             islandArea.ResetNut();
         }
 
@@ -51,8 +50,7 @@ public class MainBrainFrame : Agent {
         rigidbody.angularVelocity = Vector3.zero;
 
         bool inFrontOfNut = true;
-        if (Testing)
-        {
+        if (Testing) {
             inFrontOfNut = UnityEngine.Random.value > .5f;
         }
 
@@ -60,7 +58,7 @@ public class MainBrainFrame : Agent {
         UpdateNearestNut();
     }
 
-   
+
     public override void OnActionReceived(ActionBuffers actions) {
         if (frozen) {
             return;
@@ -83,10 +81,8 @@ public class MainBrainFrame : Agent {
         transform.rotation = Quaternion.Euler(pitch, yaw, 0f);
     }
 
-    public override void CollectObservations(VectorSensor sensor)
-    {
-        if (nearestNut == null)
-        {
+    public override void CollectObservations(VectorSensor sensor) {
+        if (nearestNut == null) {
             sensor.AddObservation(new float[10]);
             return;
         }
@@ -148,18 +144,15 @@ public class MainBrainFrame : Agent {
         rigidbody.WakeUp();
     }
 
-    private void MoveToSafeRandomPosition(bool inFrontOfNut)
-    {
+    private void MoveToSafeRandomPosition(bool inFrontOfNut) {
         bool safePositionFound = false;
         int attemps = 100;
         Vector3 potentialPosition = Vector3.zero;
         Quaternion potentialRotation = new Quaternion();
 
-        while(!safePositionFound && attemps > 0)
-        {
+        while (!safePositionFound && attemps > 0) {
             attemps--;
-            if (inFrontOfNut)
-            {
+            if (inFrontOfNut) {
                 WallNUT randomnut = islandArea.Wallnuts[UnityEngine.Random.Range(0, islandArea.Wallnuts.Count)];
 
                 float distanceFromNut = UnityEngine.Random.Range(.1f, .2f);
@@ -168,8 +161,7 @@ public class MainBrainFrame : Agent {
                 Vector3 tonut = randomnut.foodCenter - potentialPosition;
                 potentialRotation = Quaternion.LookRotation(tonut, Vector3.up);
             }
-            else
-            {
+            else {
                 float height = UnityEngine.Random.Range(1.2f, 2.5f);
 
                 float radius = UnityEngine.Random.Range(2f, 3f);
@@ -180,7 +172,7 @@ public class MainBrainFrame : Agent {
 
                 float pitch = UnityEngine.Random.Range(-60f, 60f);
                 float yaw = UnityEngine.Random.Range(-180f, 180f);
-                potentialRotation = Quaternion.Euler(pitch/2, yaw/2, 0f);
+                potentialRotation = Quaternion.Euler(pitch / 2, yaw / 2, 0f);
             }
 
             Collider[] colliders = Physics.OverlapSphere(potentialPosition, 0.05f);
@@ -190,94 +182,78 @@ public class MainBrainFrame : Agent {
         transform.rotation = potentialRotation;
     }
 
-    private void UpdateNearestNut()
-    {
-        foreach (WallNUT wallnut in islandArea.Wallnuts)
-        {
-            if (nearestNut == null && wallnut.AmountinWalnut)
-            {
+    private void UpdateNearestNut() {
+        foreach (WallNUT wallnut in islandArea.Wallnuts) {
+            if (nearestNut == null && wallnut.AmountinWalnut) {
                 nearestNut = wallnut;
             }
-            else if (wallnut.AmountinWalnut)
-            {
+            else if (wallnut.AmountinWalnut) {
                 float distanceToNut = Vector3.Distance(wallnut.transform.position, beakTip.position);
                 float distCurrent = Vector3.Distance(nearestNut.transform.position, beakTip.position);
 
-                if(!nearestNut.AmountinWalnut || distanceToNut < distCurrent)
-                {
+                if (!nearestNut.AmountinWalnut || distanceToNut < distCurrent) {
                     nearestNut = wallnut;
                 }
             }
         }
     }
-    private void OnTriggerEnter(Collider other)
-    {
+    private void OnTriggerEnter(Collider other) {
 
         TriggerEnterOrStay(other);
     }
 
-    private void OnTriggerStay(Collider other)
-    {
+    private void OnTriggerStay(Collider other) {
         TriggerEnterOrStay(other);
 
     }
 
-    private void TriggerEnterOrStay(Collider collider)
-    {
+    private void TriggerEnterOrStay(Collider collider) {
         //Check if colliding with nut, Continues because of Trigger.
-        
-        if (collider.CompareTag("food"))
-        {
-           
+
+        if (collider.CompareTag("food")) {
+
             Vector3 closestPointToBeakTip = collider.ClosestPoint(beakTip.position);
 
-           if(Vector3.Distance(beakTip.position, closestPointToBeakTip) < BeakTipRadius)
-            {
+            if (Vector3.Distance(beakTip.position, closestPointToBeakTip) < BeakTipRadius) {
                 WallNUT wallnut = islandArea.GetFood(collider);
                 float eaten = wallnut.Feed(.01f);
-           
+
 
                 checkNut += eaten;
 
-                if (Testing)
-                {
+                if (Testing) {
                     float bonus = .02f * Mathf.Clamp01(Vector3.Dot(transform.forward.normalized, -nearestNut.foodVectorUP.normalized));
                     AddReward(.01f + bonus);
                     print("add reward");
                 }
 
-                if (!wallnut.AmountinWalnut)
-                {
+                if (!wallnut.AmountinWalnut) {
                     UpdateNearestNut();
                 }
-                
+
             }
 
         }
     }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        if(Testing && collision.collider.CompareTag("boundary"))
-        {
+    private void OnCollisionEnter(Collision collision) {
+        if (Testing && collision.collider.CompareTag("boundary")) {
             //Need to add reward system
             print("remove reward");
             AddReward(-.5f);
+            // Increase the scale of the bird object (Just for testing).
+            transform.localScale += new Vector3(0.01f, 0.01f, 0.01f); 
         }
     }
 
-    private void Update()
-    {
-        if(nearestNut != null)
-        {
+    private void Update() {
+        if (nearestNut != null) {
             Debug.DrawLine(beakTip.position, nearestNut.foodCenter, Color.green);
         }
     }
 
-    private void FixedUpdate()
-    {
-        if(nearestNut != null && !nearestNut.AmountinWalnut)
-        {
+    private void FixedUpdate() {
+        if (nearestNut != null && !nearestNut.AmountinWalnut) {
             UpdateNearestNut();
         }
     }
