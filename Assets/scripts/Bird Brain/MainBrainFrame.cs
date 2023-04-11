@@ -155,16 +155,16 @@ public class MainBrainFrame : Agent {
             if (inFrontOfNut) {
                 WallNUT randomnut = islandArea.Wallnuts[UnityEngine.Random.Range(0, islandArea.Wallnuts.Count)];
 
-                float distanceFromNut = UnityEngine.Random.Range(.1f, .2f);
+                float distanceFromNut = UnityEngine.Random.Range(.2f, .3f);
                 potentialPosition = randomnut.transform.position + randomnut.foodVectorUP * distanceFromNut;
 
                 Vector3 tonut = randomnut.foodCenter - potentialPosition;
                 potentialRotation = Quaternion.LookRotation(tonut, Vector3.up);
             }
             else {
-                float height = UnityEngine.Random.Range(1.2f, 2.5f);
+                float height = UnityEngine.Random.Range(.12f, .25f);
 
-                float radius = UnityEngine.Random.Range(2f, 3f);
+                float radius = UnityEngine.Random.Range(.2f, .3f);
 
                 Quaternion direction = Quaternion.Euler(0f, UnityEngine.Random.Range(-180f, 180f), 0f);
 
