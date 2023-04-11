@@ -20,12 +20,12 @@ public class SimulationResource : MonoBehaviour
 
     void OnMouseDown()
     {
-        if (FindAnyObjectByType<SimulationManager>().step != SimulationManager.SimulationStep.SetupEnvironment)
+        if (FindObjectOfType<SimulationManager>().step != SimulationManager.SimulationStep.SetupEnvironment)
         {
             return;
         }
 
-        SimulationResourceHolder holder = FindAnyObjectByType<SimulationResourceHolder>();
+        SimulationResourceHolder holder = FindObjectOfType<SimulationResourceHolder>();
         if (holder.selected < holder.possibleResources.Length)
         {
             if (resource != null)
