@@ -13,6 +13,6 @@ public class LessonPlanWrapper : MonoBehaviour
 
     public void EditLessonPlan()
     {
-
+        
     }
 }
