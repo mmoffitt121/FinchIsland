@@ -222,14 +222,20 @@ public class MainBrainFrame : Agent {
                 checkNut += eaten;
 
                 if (Testing) {
+                    rigidbody.isKinematic = true;
+
                     float bonus = .02f * Mathf.Clamp01(Vector3.Dot(transform.forward.normalized, -nearestNut.foodVectorUP.normalized));
                     AddReward(.01f + bonus);
                     print("add reward");
+                    // Increase the scale of the bird object (Just for testing).
+                    //transform.localScale += new Vector3(0.01f, 0.01f, 0.01f);
                 }
 
                 if (!wallnut.AmountinWalnut) {
                     UpdateNearestNut();
                 }
+
+                rigidbody.isKinematic = false;
 
             }
 
@@ -238,12 +244,14 @@ public class MainBrainFrame : Agent {
 
     private void OnCollisionEnter(Collision collision) {
         if (Testing && collision.collider.CompareTag("boundary")) {
+            rigidbody.isKinematic = true;
             //Need to add reward system
             print("remove reward");
             AddReward(-.5f);
-            // Increase the scale of the bird object (Just for testing).
-            transform.localScale += new Vector3(0.01f, 0.01f, 0.01f); 
+            
         }
+        rigidbody.isKinematic = false;
+
     }
 
     private void Update() {
