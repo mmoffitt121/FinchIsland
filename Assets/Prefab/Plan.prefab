@@ -122,8 +122,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7468568374574505530}
-        m_TargetAssemblyTypeName: LessonPlanWrapper, Assembly-CSharp
+      - m_Target: {fileID: 8960866887588262997}
+        m_TargetAssemblyTypeName: LessonPlanUI, Assembly-CSharp
         m_MethodName: DeleteLessonPlan
         m_Mode: 1
         m_Arguments:
@@ -454,6 +454,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lessonPlanPrefab: {fileID: 0}
   lessonPlanList: {fileID: 0}
+  lessonPlan:
+    nodes: []
 --- !u!1 &5872092660481457787
 GameObject:
   m_ObjectHideFlags: 0
