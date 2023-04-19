@@ -5,6 +5,8 @@ using UnityEngine.Networking;
 using UnityEngine;
 using System.Collections;
 using System.IO;
+using UnityEngine.SceneManagement;
+using TMPro;
 
 namespace Encryption
 {
@@ -52,8 +54,7 @@ namespace Encryption
                     writer.WriteLine("Email: " + email);
                     writer.WriteLine("ID: " + parsedata[0]);
                 }
-
-                // move to main menu
+                SceneManager.LoadScene(0);
             }
             else
             {
