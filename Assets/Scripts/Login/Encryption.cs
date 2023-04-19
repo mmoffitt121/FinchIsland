@@ -1,45 +1,63 @@
 ﻿using System.Security.Cryptography;
-using Microsoft.Data.SqlClient;
-using Dapper;
 using System.Text;
-using System.Threading.Tasks;
 using System;
+using UnityEngine.Networking;
+using UnityEngine;
+using System.Collections;
+using System.IO;
 
 namespace Encryption
 {
     public class PasswordManager
     {
-        public async Task<bool> Login(string email, string password)
+        public IEnumerator Login(string email, string password, System.Action<string> OnData)
         {
+            Debug.Log("HERE");
             string hash = "";
             using (SHA256 sha256 = SHA256.Create())
             {
                 byte[] inputBytes = Encoding.UTF8.GetBytes(password);
                 byte[] hashBytes = sha256.ComputeHash(inputBytes);
                 hash = BitConverter.ToString(hashBytes).Replace("-", "").ToLower();
-                //return hash;
             }
 
-            using (var cn = new SqlConnection("Data Source=datafinchisland.c4zvhtgu2ttu.us-east-1.rds.amazonaws.com,1433;Initial Catalog=Licenses;User id=admin;Password=gerald01"))
+            string url = $"http://localhost/app/access.php?email={email}&pass={hash}";
+
+            Debug.Log(url);
+
+            UnityWebRequest request = UnityWebRequest.Get(url);
+
+            yield return request.SendWebRequest();
+
+            if (request.result == UnityWebRequest.Result.ConnectionError || request.result == UnityWebRequest.Result.ProtocolError)
             {
-                string query = @$"SELECT * FROM PrimaryLicenses WHERE Email = '{email}'";
-                var result = await cn.QueryFirstOrDefaultAsync<Account>(query);
-                if (result == null)
+                Debug.Log(request.error);
+            }
+            else if (request.downloadHandler.text != "")
+            {
+                Debug.Log(request.downloadHandler.text);
+
+                string[] parsedata = request.downloadHandler.text.Split(',');
+
+                string path = Environment.CurrentDirectory + "\\save\\current_user.txt";
+
+                if (File.Exists(path))
                 {
-                    Console.WriteLine("Email not registered!");
-                    return false;
+                    Debug.Log("File already exists at " + path + "Deleteing.. ");
+                    File.Delete(path);
                 }
-                else if (result.Password == hash)
+
+                using (StreamWriter writer = new StreamWriter(path))
                 {
-                    Console.WriteLine($@"Password Accepted!");
-                    Console.WriteLine($@"Welcome: {result.FirstName}");
-                    return true;
+                    writer.WriteLine("Email: " + email);
+                    writer.WriteLine("ID: " + parsedata[0]);
                 }
-                else
-                {
-                    Console.WriteLine("Password is incorrect!");
-                    return false;
-                }
+
+                // move to main menu
+            }
+            else
+            {
+                Debug.Log("Invalid Login!");
             }
         }
     }

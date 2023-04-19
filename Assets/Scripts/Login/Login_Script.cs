@@ -5,6 +5,9 @@ using UnityEngine;
 using Encryption;
 using System;
 using TMPro;
+using System.Security.Cryptography;
+using UnityEngine.Networking;
+using System.Text;
 
 public class Login_Script : MonoBehaviour
 {
@@ -21,7 +24,7 @@ public class Login_Script : MonoBehaviour
         loginButton.onClick.AddListener(captureCredentials);
     }
 
-    public async void captureCredentials() 
+    public void captureCredentials() 
     {
         string userName = usernameField.text;
         string password = passwordField.text;
@@ -32,7 +35,14 @@ public class Login_Script : MonoBehaviour
         Debug.Log("loginButton: " + loginButton);
         Debug.Log("passwordManager: " + passwordManager);
 
-        bool isLoggedIn = await passwordManager.Login(userName, password);
-        Debug.Log(isLoggedIn);
+        string data = "";
+
+        StartCoroutine(passwordManager.Login(userName, password, s => data = s));
+
+        //IEnumerator e = Login(userName, password, s => data = s);
+
+        //yield return StartCoroutine(passwordManager.Login(userName, password, s => data = s));
+
+        //bool isLoggedIn = await passwordManager.Login(userName, password);
     }
 }
