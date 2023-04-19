@@ -3,10 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.UI;
+using TMPro;
 
 public class test : MonoBehaviour
 {
-    public Dropdown resolutionDropdown;
+    public AudioMixer audioMixer;
+    public TMP_Dropdown resolutionDropdown;
+    public Slider volumeSlider;
+    float currentVolume;
+
+    public Slider VolumeSlider;
 
     void Start()
     {
@@ -28,15 +34,31 @@ public class test : MonoBehaviour
         LoadSettings(currentResolutionIndex);
     }
 
-    public void SetResolution(int resolutionIndex)
+    public void SetVolume(float volume)
+    {
+        audioMixer.SetFloat("Volume", volume);
+        currentVolume = volume;
+    }
+
+    public void SetFullscreen(bool isFullscreen)
+    {
+        Screen.fullScreen = isFullscreen;
+    }
+
+    /*public void SetResolution(int resolutionIndex)
     {
         Resolution resolution = Screen.resolutions[resolutionIndex];
         Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
-    }
+    }*/
 
-    public void SaveSettings()
+    public void SaveSettings(int resolutionIndex)
     {
+        Resolution resolution = Screen.resolutions[resolutionIndex];
+        Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
         PlayerPrefs.SetInt("ResolutionPreference", resolutionDropdown.value);
+        //PlayerPrefs.SetInt("FullscreenPreference",Convert.ToInt32(Screen.fullScreen));
+        //PlayerPrefs.SetFloat("VolumePreference",currentVolume);
+        
     }
 
     public void LoadSettings(int currentResolutionIndex)
@@ -45,5 +67,15 @@ public class test : MonoBehaviour
             resolutionDropdown.value = PlayerPrefs.GetInt("ResolutionPreference");
         else
             resolutionDropdown.value = currentResolutionIndex;
+       /* if (PlayerPrefs.HasKey("FullscreenPreference"))
+            Screen.fullScreen = Convert.ToBoolean(PlayerPrefs.GetInt("FullscreenPreference"));
+        else
+            Screen.fullScreen = true;
+        if (PlayerPrefs.HasKey("VolumePreference"))
+            VolumeSlider.value = PlayerPrefs.GetFloat("VolumePreference");
+        else
+            VolumeSlider.value = PlayerPrefs.GetFloat("VolumePreference");*/
     }
+
+
 }
