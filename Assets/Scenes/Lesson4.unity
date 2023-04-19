@@ -462,7 +462,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -736.49945, y: 399.99982}
+  m_AnchoredPosition: {x: -736.49945, y: 400.00006}
   m_SizeDelta: {x: 1472, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &780512417
@@ -485,46 +485,45 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'The finch is a small passerine bird that is found on various islands and
-    continents throughout the world. One particular species of finch that is known
-    for its diet of worms is the Galapagos finch. These birds are endemic to the
-    Galapagos Islands, a volcanic archipelago located off the coast of Ecuador in
-    South America.
+  m_text: 'The finch is a small, brightly colored bird that is known for its ability
+    to adapt to various environments. One such environment is the lush, tropical
+    island with an abundance of fruit-bearing trees. This particular finch is a skilled
+    berry eater, with a sharp beak and keen eyesight to help it find the juiciest
+    and ripest berries on the island.
 
+    
 
+    With its colorful feathers ranging
+    from bright reds to deep blues and purples, the finch is a stunning sight to
+    behold. Its wingspan is about 6 inches, and it weighs only a few ounces, making
+    it a nimble and agile flier. Its small size allows it to dart in and out of the
+    thick foliage of the island''s trees, making it an expert at avoiding predators.
 
-    The Galapagos finch is a relatively small bird, with an
-    average length of around 13-15 centimeters and a weight of around 15-20 grams.
-    They have a distinctive beak that is adapted to their diet of worms and insects,
-    with a sharp, pointed tip that allows them to pick up small prey from crevices
-    and cracks in trees and rocks.
+    
 
+    As
+    a berry eater, this finch is an important part of the island''s ecosystem. Its
+    diet consists primarily of small, sweet berries, which it plucks from the trees
+    with its beak. This diet is not only nutritious for the finch, but it also helps
+    to spread the seeds of the trees it feeds on, ensuring the continued growth and
+    reproduction of the island''s vegetation.
 
+    
 
-    These finches are also known for their
-    diverse range of beak shapes and sizes, which have evolved to suit the specific
-    food sources available on each island in the Galapagos archipelago. This process
-    of adaptive radiation, where a single ancestral species diversifies into multiple
-    specialized forms, is one of the most famous examples of evolution by natural
-    selection, as observed and documented by Charles Darwin during his visit to the
-    Galapagos Islands in the 19th century.
+    Despite its small size,
+    the finch is a highly intelligent bird. It is capable of problem-solving, and
+    it has been observed using tools to access hard-to-reach berries. It is also
+    a social bird, often seen in small flocks with other finches, chirping and singing
+    to communicate with its peers.
 
+    
 
-
-    The Galapagos finch is primarily
-    found in forested areas of the islands, where they can find plenty of worms and
-    insects to feed on. They are also known to feed on fruits and seeds, depending
-    on the season and availability of food. The Galapagos finch is a solitary bird,
-    although they may occasionally be seen in pairs or small groups.
-
-
-
-    Despite
-    their small size and relatively low profile, the Galapagos finch plays an important
-    role in the ecology of the islands. They help to control insect populations and
-    disperse seeds through their feeding and movement patterns. Additionally, they
-    have become a symbol of the unique and diverse wildlife of the Galapagos Islands,
-    and are a popular subject for scientific research and conservation efforts.'
+    Living on a tropical island, the
+    finch is exposed to a variety of weather conditions, including intense heat and
+    heavy rainfall. However, its feathers are specially adapted to protect it from
+    the elements, with a thick layer of down underneath its colorful outer feathers
+    to insulate it against the cold, and a waterproof coating on the outside to repel
+    water.'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -992,7 +991,7 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 5
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -1601,8 +1600,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1971695123}
   m_HandleRect: {fileID: 1971695122}
   m_Direction: 2
-  m_Value: 1.0000005
-  m_Size: 0.62396413
+  m_Value: 0.9999997
+  m_Size: 0.8061753
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:

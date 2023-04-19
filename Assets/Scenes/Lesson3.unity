@@ -462,7 +462,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -736.49945, y: 399.9998}
+  m_AnchoredPosition: {x: -736.49945, y: 399.99924}
   m_SizeDelta: {x: 1472, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &780512417
@@ -485,46 +485,40 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'The finch is a small passerine bird that is found on various islands and
-    continents throughout the world. One particular species of finch that is known
-    for its diet of worms is the Galapagos finch. These birds are endemic to the
-    Galapagos Islands, a volcanic archipelago located off the coast of Ecuador in
-    South America.
+  m_text: 'The finch is a small, colorful bird that is well-known for its varied
+    diet. While most finches primarily feed on seeds and insects, there are some
+    species that also include leaves and fruits in their diet. One such species is
+    the finch that feeds on the leaves of a tree and lives on an island with many
+    trees.
 
+    
 
+    This particular finch has a unique adaptation that allows
+    it to digest and extract nutrients from tough, fibrous plant material like leaves.
+    Its beak is specially adapted to break down the cellulose found in leaves, allowing
+    it to access the valuable nutrients within.
 
-    The Galapagos finch is a relatively small bird, with an
-    average length of around 13-15 centimeters and a weight of around 15-20 grams.
-    They have a distinctive beak that is adapted to their diet of worms and insects,
-    with a sharp, pointed tip that allows them to pick up small prey from crevices
-    and cracks in trees and rocks.
+    
 
+    The island on which
+    this finch lives is covered in lush vegetation, with a wide variety of trees
+    providing ample food and shelter. This abundance of resources has allowed the
+    finch to thrive, with populations growing steadily over time.
 
-
-    These finches are also known for their
-    diverse range of beak shapes and sizes, which have evolved to suit the specific
-    food sources available on each island in the Galapagos archipelago. This process
-    of adaptive radiation, where a single ancestral species diversifies into multiple
-    specialized forms, is one of the most famous examples of evolution by natural
-    selection, as observed and documented by Charles Darwin during his visit to the
-    Galapagos Islands in the 19th century.
-
-
-
-    The Galapagos finch is primarily
-    found in forested areas of the islands, where they can find plenty of worms and
-    insects to feed on. They are also known to feed on fruits and seeds, depending
-    on the season and availability of food. The Galapagos finch is a solitary bird,
-    although they may occasionally be seen in pairs or small groups.
-
-
+    
 
     Despite
-    their small size and relatively low profile, the Galapagos finch plays an important
-    role in the ecology of the islands. They help to control insect populations and
-    disperse seeds through their feeding and movement patterns. Additionally, they
-    have become a symbol of the unique and diverse wildlife of the Galapagos Islands,
-    and are a popular subject for scientific research and conservation efforts.'
+    its small size, this finch is a crucial part of the island''s ecosystem. By feeding
+    on leaves, it helps to maintain the delicate balance between the plant and animal
+    populations. Its unique adaptation also makes it an important subject of study
+    for scientists interested in the evolution of dietary adaptations in birds.
+
+    
+
+    Overall,
+    the finch that eats leaves and lives on an island with trees is a fascinating
+    and important species. Its ability to thrive on a varied diet and adapt to its
+    environment makes it a valuable part of the natural world.'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -858,7 +852,7 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 5
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -1736,8 +1730,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1971695123}
   m_HandleRect: {fileID: 1971695122}
   m_Direction: 2
-  m_Value: 1.0000005
-  m_Size: 0.6239652
+  m_Value: 1.0000107
+  m_Size: 0.9214997
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
