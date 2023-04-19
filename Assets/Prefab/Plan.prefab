@@ -454,6 +454,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lessonPlanPrefab: {fileID: 0}
   lessonPlanList: {fileID: 0}
+  lessonPlan:
+    nodes: []
 --- !u!1 &5872092660481457787
 GameObject:
   m_ObjectHideFlags: 0
