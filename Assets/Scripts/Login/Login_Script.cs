@@ -30,19 +30,8 @@ public class Login_Script : MonoBehaviour
         string password = passwordField.text;
         passwordManager = new PasswordManager();
 
-        Debug.Log("usernameField: " + userName);
-        Debug.Log("passwordField: " + password);
-        Debug.Log("loginButton: " + loginButton);
-        Debug.Log("passwordManager: " + passwordManager);
-
         string data = "";
 
         StartCoroutine(passwordManager.Login(userName, password, s => data = s));
-
-        //IEnumerator e = Login(userName, password, s => data = s);
-
-        //yield return StartCoroutine(passwordManager.Login(userName, password, s => data = s));
-
-        //bool isLoggedIn = await passwordManager.Login(userName, password);
     }
 }

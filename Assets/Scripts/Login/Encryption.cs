@@ -14,7 +14,6 @@ namespace Encryption
     {
         public IEnumerator Login(string email, string password, System.Action<string> OnData)
         {
-            Debug.Log("HERE");
             string hash = "";
             using (SHA256 sha256 = SHA256.Create())
             {
@@ -24,8 +23,6 @@ namespace Encryption
             }
 
             string url = $"http://localhost/app/access.php?email={email}&pass={hash}";
-
-            Debug.Log(url);
 
             UnityWebRequest request = UnityWebRequest.Get(url);
 
@@ -37,15 +34,13 @@ namespace Encryption
             }
             else if (request.downloadHandler.text != "")
             {
-                Debug.Log(request.downloadHandler.text);
-
                 string[] parsedata = request.downloadHandler.text.Split(',');
 
                 string path = Environment.CurrentDirectory + "\\save\\current_user.txt";
 
                 if (File.Exists(path))
                 {
-                    Debug.Log("File already exists at " + path + "Deleteing.. ");
+                    Debug.Log("File already exists at " + path + " Deleteing.. ");
                     File.Delete(path);
                 }
 
