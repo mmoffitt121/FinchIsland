@@ -39,8 +39,8 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Armature|ArmatureAction
-      takeName: Armature|ArmatureAction
+      name: FlyForward
+      takeName: ArmatureAction
       internalID: 0
       firstFrame: 0
       lastFrame: 20
@@ -68,8 +68,8 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Armature|FlyIdle
-      takeName: Armature|FlyIdle
+      name: FlyIdle
+      takeName: FlyIdle
       internalID: 0
       firstFrame: 0
       lastFrame: 22
@@ -97,8 +97,8 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Armature|IdleSitting
-      takeName: Armature|IdleSitting
+      name: IdleSitting
+      takeName: IdleSitting
       internalID: 585613287950114569
       firstFrame: 0
       lastFrame: 19
