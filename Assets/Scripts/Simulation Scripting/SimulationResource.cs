@@ -6,6 +6,7 @@ using UnityEngine;
 public class SimulationResource : MonoBehaviour
 {
     public GameObject resource;
+    public GameObject particleEmitter;
 
     private void Start()
     {
@@ -16,6 +17,13 @@ public class SimulationResource : MonoBehaviour
     {
         resource = Instantiate(go);
         resource.transform.position = transform.position;
+        particleEmitter.SetActive(false);
+    }
+
+    public void RemoveObject()
+    {
+        DestroyImmediate(resource);
+        particleEmitter.SetActive(true);
     }
 
     void OnMouseDown()
