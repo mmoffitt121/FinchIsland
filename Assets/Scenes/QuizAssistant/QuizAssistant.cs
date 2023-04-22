@@ -13,7 +13,7 @@ namespace OpenAI
         [SerializeField] private InputField inputField;
         [SerializeField] private Button button;
         [SerializeField] private Button Show_Answer;
-        //[SerializeField] private Button Go_to_Scene;
+      
 
         [SerializeField] private ScrollRect scroll;
         
@@ -22,11 +22,12 @@ namespace OpenAI
         //Height value for Scroll Wheel
         private float height;
         //OPEN AI OBJ AUTHENTICATOR
-        private OpenAIApi openai = new OpenAIApi("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");
+        private OpenAIApi openai = new OpenAIApi("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");
 
         private string userInput;
         //INITIALIZING THE CHAT BOT TO SIMPLIFY QUIZ REQUESTS FOR THE FACILITATOR
         private string prompt = "Act as Quiz maker assistant for a teacher. Make multiple choice quiz questions about finches. Make sure to have only 1 correct choice out of 4 choices. DO NOT SHOW THE CORRECT ANSWER";
+        private string tmp_prompt;
 
         //private string new_prompt = "Show the answers to the previous questions, make sure that they are matching the previous questions";
         //WAIT FOR BUTTON TO BE CLICKED TO SEND A COMPLETION REQUEST
@@ -57,7 +58,7 @@ namespace OpenAI
           
             print("Reply function print statement");
             userInput = inputField.text;
-            prompt += $"{userInput}\nResponse: ";
+            prompt += $"{userInput}";
             AppendMessage(userInput);
             
             button.enabled = false;
@@ -90,11 +91,11 @@ namespace OpenAI
         {
 
             print("Reveal Answer print statement");
-            //userInput = inputField.text;
+       
             string temp = "Reveal the answer to the previous Questions";
-            prompt += $"{temp}";
-
             AppendMessage(temp);
+            prompt += $"\n{temp} Format them in Order ";
+
 
             Show_Answer.enabled = false;
             inputField.text = "";
@@ -112,6 +113,11 @@ namespace OpenAI
             {
                 AppendMessage(completionResponse.Choices[0].Text, false);
                 prompt += $"{completionResponse.Choices[0].Text}";
+                string Debug_Completion = prompt;
+                var Fixed_Completion = completionResponse.Choices[0].Text;
+                // print(Debug_Completion);
+                //print(completionResponse.Choices[0].Text);
+                print(Fixed_Completion);
             }
             else
             {
