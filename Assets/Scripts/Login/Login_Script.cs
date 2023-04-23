@@ -56,7 +56,7 @@ public class Login_Script : MonoBehaviour
                 writer.WriteLine("ID: -1");
             }
             */
-            SceneManager.LoadScene(0);
+            SceneManager.LoadScene(1);
         }
     }
 }
