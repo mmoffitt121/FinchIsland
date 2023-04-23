@@ -2,31 +2,22 @@
     "Bird": {
         "checkpoints": [
             {
-                "steps": 3512,
-                "file_path": "results\\ppo\\Bird\\Bird-3512.onnx",
-                "reward": -22.00104562441508,
-                "creation_time": 1681229255.075817,
+                "steps": 2048,
+                "file_path": "results\\ppo\\Bird\\Bird-2048.onnx",
+                "reward": null,
+                "creation_time": 1682035563.672277,
                 "auxillary_file_paths": [
-                    "results\\ppo\\Bird\\Bird-3512.pt"
-                ]
-            },
-            {
-                "steps": 30919,
-                "file_path": "results\\ppo\\Bird\\Bird-30919.onnx",
-                "reward": -68.59981850215367,
-                "creation_time": 1681229951.4228632,
-                "auxillary_file_paths": [
-                    "results\\ppo\\Bird\\Bird-30919.pt"
+                    "results\\ppo\\Bird\\Bird-2048.pt"
                 ]
             }
         ],
         "final_checkpoint": {
-            "steps": 30919,
+            "steps": 2048,
             "file_path": "results\\ppo\\Bird.onnx",
-            "reward": -68.59981850215367,
-            "creation_time": 1681229951.4228632,
+            "reward": null,
+            "creation_time": 1682035563.672277,
             "auxillary_file_paths": [
-                "results\\ppo\\Bird\\Bird-30919.pt"
+                "results\\ppo\\Bird\\Bird-2048.pt"
             ]
         }
     },

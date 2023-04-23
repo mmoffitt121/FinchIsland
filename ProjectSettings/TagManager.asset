@@ -7,6 +7,7 @@ TagManager:
   - food
   - boundary
   - foodB
+  - SimulationResource
   layers:
   - Default
   - TransparentFX
