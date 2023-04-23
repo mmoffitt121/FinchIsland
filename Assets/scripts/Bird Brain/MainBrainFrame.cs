@@ -49,12 +49,6 @@ public class MainBrainFrame : Agent {
         rigidbody.velocity = Vector3.zero;
         rigidbody.angularVelocity = Vector3.zero;
 
-        bool inFrontOfNut = true;
-        if (Testing) {
-            inFrontOfNut = UnityEngine.Random.value > .5f;
-        }
-
-        MoveToSafeRandomPosition(inFrontOfNut);
         UpdateNearestNut();
     }
 
@@ -144,44 +138,7 @@ public class MainBrainFrame : Agent {
         rigidbody.WakeUp();
     }
 
-    private void MoveToSafeRandomPosition(bool inFrontOfNut) {
-        bool safePositionFound = false;
-        int attemps = 100;
-        Vector3 potentialPosition = Vector3.zero;
-        Quaternion potentialRotation = new Quaternion();
-
-        while (!safePositionFound && attemps > 0) {
-            attemps--;
-            if (inFrontOfNut) {
-                WallNUT randomnut = islandArea.Wallnuts[UnityEngine.Random.Range(0, islandArea.Wallnuts.Count)];
-
-                float distanceFromNut = UnityEngine.Random.Range(.2f, .3f);
-                potentialPosition = randomnut.transform.position + randomnut.foodVectorUP * distanceFromNut;
-
-                Vector3 tonut = randomnut.foodCenter - potentialPosition;
-                potentialRotation = Quaternion.LookRotation(tonut, Vector3.up);
-            }
-            else {
-                float height = UnityEngine.Random.Range(.12f, .25f);
-
-                float radius = UnityEngine.Random.Range(.2f, .3f);
-
-                Quaternion direction = Quaternion.Euler(0f, UnityEngine.Random.Range(-180f, 180f), 0f);
-
-                potentialPosition = islandArea.transform.position + Vector3.up * height + direction * Vector3.forward * radius;
-
-                float pitch = UnityEngine.Random.Range(-60f, 60f);
-                float yaw = UnityEngine.Random.Range(-180f, 180f);
-                potentialRotation = Quaternion.Euler(pitch / 2, yaw / 2, 0f);
-            }
-
-            Collider[] colliders = Physics.OverlapSphere(potentialPosition, 0.05f);
-            safePositionFound = colliders.Length == 0f;
-        }
-        transform.position = potentialPosition;
-        transform.rotation = potentialRotation;
-    }
-
+   
     private void UpdateNearestNut() {
         foreach (WallNUT wallnut in islandArea.Wallnuts) {
             if (nearestNut == null && wallnut.AmountinWalnut) {
@@ -222,14 +179,20 @@ public class MainBrainFrame : Agent {
                 checkNut += eaten;
 
                 if (Testing) {
+                    rigidbody.isKinematic = true;
+
                     float bonus = .02f * Mathf.Clamp01(Vector3.Dot(transform.forward.normalized, -nearestNut.foodVectorUP.normalized));
                     AddReward(.01f + bonus);
                     print("add reward");
+                    // Increase the scale of the bird object (Just for testing).
+                    //transform.localScale += new Vector3(0.01f, 0.01f, 0.01f);
                 }
 
                 if (!wallnut.AmountinWalnut) {
                     UpdateNearestNut();
                 }
+
+                rigidbody.isKinematic = false;
 
             }
 
@@ -237,13 +200,22 @@ public class MainBrainFrame : Agent {
     }
 
     private void OnCollisionEnter(Collision collision) {
-        if (Testing && collision.collider.CompareTag("boundary")) {
+        if (Testing && collision.collider.CompareTag("SimulationResource"))
+        {
+            rigidbody.isKinematic = true;
+            print("Ignoring simulation resource, no reward taken or recieved");
+        }
+
+        else if (Testing && collision.collider.CompareTag("boundary")) {
+            rigidbody.isKinematic = true;
             //Need to add reward system
             print("remove reward");
             AddReward(-.5f);
-            // Increase the scale of the bird object (Just for testing).
-            transform.localScale += new Vector3(0.01f, 0.01f, 0.01f); 
+            
         }
+       
+        rigidbody.isKinematic = false;
+
     }
 
     private void Update() {
