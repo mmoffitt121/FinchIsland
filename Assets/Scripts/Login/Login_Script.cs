@@ -8,6 +8,8 @@ using TMPro;
 using System.Security.Cryptography;
 using UnityEngine.Networking;
 using System.Text;
+using System.IO;
+using UnityEngine.SceneManagement;
 
 public class Login_Script : MonoBehaviour
 {
@@ -32,6 +34,29 @@ public class Login_Script : MonoBehaviour
 
         string data = "";
 
-        StartCoroutine(passwordManager.Login(userName, password, s => data = s));
+        if (userName != "sysAdmin" && password != "sysAdmin")
+        {
+            StartCoroutine(passwordManager.Login(userName, password, s => data = s));
+        }
+        else
+        {
+            // if sysadmin, dont access mysql
+            /*
+            string path = Environment.CurrentDirectory + "\\save\\current_user.txt";
+
+            if (File.Exists(path))
+            {
+                Debug.Log("File already exists at " + path + " Deleteing.. ");
+                File.Delete(path);
+            }
+
+            using (StreamWriter writer = new StreamWriter(path))
+            {
+                writer.WriteLine("Email: sysAdmin");
+                writer.WriteLine("ID: -1");
+            }
+            */
+            SceneManager.LoadScene(0);
+        }
     }
 }
