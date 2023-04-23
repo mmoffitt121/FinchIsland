@@ -462,7 +462,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -736.49945, y: 399.99924}
+  m_AnchoredPosition: {x: -736.49945, y: 399.99997}
   m_SizeDelta: {x: 1472, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &780512417
@@ -491,29 +491,29 @@ MonoBehaviour:
     the finch that feeds on the leaves of a tree and lives on an island with many
     trees.
 
-    
 
-    This particular finch has a unique adaptation that allows
-    it to digest and extract nutrients from tough, fibrous plant material like leaves.
+
+    This particular finch has a unique adaptation that allows it to
+    digest and extract nutrients from tough, fibrous plant material like leaves.
     Its beak is specially adapted to break down the cellulose found in leaves, allowing
     it to access the valuable nutrients within.
 
-    
 
-    The island on which
-    this finch lives is covered in lush vegetation, with a wide variety of trees
-    providing ample food and shelter. This abundance of resources has allowed the
-    finch to thrive, with populations growing steadily over time.
 
-    
+    The island on which this finch
+    lives is covered in lush vegetation, with a wide variety of trees providing ample
+    food and shelter. This abundance of resources has allowed the finch to thrive,
+    with populations growing steadily over time.
 
-    Despite
-    its small size, this finch is a crucial part of the island''s ecosystem. By feeding
-    on leaves, it helps to maintain the delicate balance between the plant and animal
-    populations. Its unique adaptation also makes it an important subject of study
-    for scientists interested in the evolution of dietary adaptations in birds.
 
-    
+
+    Despite its small size, this
+    finch is a crucial part of the island''s ecosystem. By feeding on leaves, it
+    helps to maintain the delicate balance between the plant and animal populations.
+    Its unique adaptation also makes it an important subject of study for scientists
+    interested in the evolution of dietary adaptations in birds.
+
+
 
     Overall,
     the finch that eats leaves and lives on an island with trees is a fascinating
@@ -527,8 +527,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4278979596
+  m_fontColor: {r: 0.047169805, g: 0.047169805, b: 0.047169805, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -1309,8 +1309,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4278190080
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -1730,8 +1730,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1971695123}
   m_HandleRect: {fileID: 1971695122}
   m_Direction: 2
-  m_Value: 1.0000107
-  m_Size: 0.9214997
+  m_Value: 1
+  m_Size: 0.77387375
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:

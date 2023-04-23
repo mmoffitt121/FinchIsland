@@ -596,7 +596,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -736.49945, y: 399.99933}
+  m_AnchoredPosition: {x: -736.49945, y: 399.99994}
   m_SizeDelta: {x: 1472, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &780512417
@@ -622,7 +622,7 @@ MonoBehaviour:
   m_text: 'One such environment is the island with trees, where the finch can be
     found eating nuts and other types of seeds.
 
-    
+
 
     One of the key characteristics
     of the finch is its beak, which is specially adapted to its diet. In the case
@@ -631,23 +631,23 @@ MonoBehaviour:
     inside. The beak is also slightly curved, which helps the finch to grasp and
     manipulate the nuts as it feeds.
 
-    
 
-    The island environment where the
-    finch lives is also an important factor in its life cycle. The trees on the island
+
+    The island environment where the finch
+    lives is also an important factor in its life cycle. The trees on the island
     provide a source of food and shelter for the bird, as well as a place to nest
     and raise its young. The nuts that the finch eats are a vital source of energy,
     allowing the bird to survive and thrive in this environment.
 
-    
 
-    The
-    finch is also known for its colorful plumage, which can vary widely depending
-    on the species. Some finches have bright red or orange feathers, while others
-    are more muted in color. This variation in color is thought to play a role in
-    attracting mates and establishing social hierarchies within the bird''s community.
 
-    
+    The finch
+    is also known for its colorful plumage, which can vary widely depending on the
+    species. Some finches have bright red or orange feathers, while others are more
+    muted in color. This variation in color is thought to play a role in attracting
+    mates and establishing social hierarchies within the bird''s community.
+
+
 
     Overall,
     the finch that eats nuts and lives on an island with trees is a fascinating creature
@@ -662,8 +662,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4278190080
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -1444,8 +1444,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4278190080
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -1731,8 +1731,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1971695123}
   m_HandleRect: {fileID: 1971695122}
   m_Direction: 2
-  m_Value: 1.0000061
-  m_Size: 0.8795558
+  m_Value: 1
+  m_Size: 0.7440779
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:

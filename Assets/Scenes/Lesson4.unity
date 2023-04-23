@@ -462,7 +462,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -736.49945, y: 400.00006}
+  m_AnchoredPosition: {x: -736.49945, y: 400}
   m_SizeDelta: {x: 1472, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &780512417
@@ -491,15 +491,15 @@ MonoBehaviour:
     berry eater, with a sharp beak and keen eyesight to help it find the juiciest
     and ripest berries on the island.
 
-    
 
-    With its colorful feathers ranging
-    from bright reds to deep blues and purples, the finch is a stunning sight to
-    behold. Its wingspan is about 6 inches, and it weighs only a few ounces, making
-    it a nimble and agile flier. Its small size allows it to dart in and out of the
-    thick foliage of the island''s trees, making it an expert at avoiding predators.
 
-    
+    With its colorful feathers ranging from
+    bright reds to deep blues and purples, the finch is a stunning sight to behold.
+    Its wingspan is about 6 inches, and it weighs only a few ounces, making it a
+    nimble and agile flier. Its small size allows it to dart in and out of the thick
+    foliage of the island''s trees, making it an expert at avoiding predators.
+
+
 
     As
     a berry eater, this finch is an important part of the island''s ecosystem. Its
@@ -508,21 +508,21 @@ MonoBehaviour:
     to spread the seeds of the trees it feeds on, ensuring the continued growth and
     reproduction of the island''s vegetation.
 
-    
 
-    Despite its small size,
-    the finch is a highly intelligent bird. It is capable of problem-solving, and
-    it has been observed using tools to access hard-to-reach berries. It is also
-    a social bird, often seen in small flocks with other finches, chirping and singing
-    to communicate with its peers.
 
-    
+    Despite its small size, the
+    finch is a highly intelligent bird. It is capable of problem-solving, and it
+    has been observed using tools to access hard-to-reach berries. It is also a social
+    bird, often seen in small flocks with other finches, chirping and singing to
+    communicate with its peers.
 
-    Living on a tropical island, the
-    finch is exposed to a variety of weather conditions, including intense heat and
-    heavy rainfall. However, its feathers are specially adapted to protect it from
-    the elements, with a thick layer of down underneath its colorful outer feathers
-    to insulate it against the cold, and a waterproof coating on the outside to repel
+
+
+    Living on a tropical island, the finch is
+    exposed to a variety of weather conditions, including intense heat and heavy
+    rainfall. However, its feathers are specially adapted to protect it from the
+    elements, with a thick layer of down underneath its colorful outer feathers to
+    insulate it against the cold, and a waterproof coating on the outside to repel
     water.'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -532,8 +532,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4278190080
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -1313,8 +1313,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4278190080
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -1600,8 +1600,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1971695123}
   m_HandleRect: {fileID: 1971695122}
   m_Direction: 2
-  m_Value: 0.9999997
-  m_Size: 0.8061753
+  m_Value: 1
+  m_Size: 0.69087
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
