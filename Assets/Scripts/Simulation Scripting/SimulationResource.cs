@@ -28,6 +28,7 @@ public class SimulationResource : MonoBehaviour
 
     void OnMouseDown()
     {
+        print("Clicked");
         if (FindObjectOfType<SimulationManager>().step != SimulationManager.SimulationStep.SetupEnvironment)
         {
             return;
@@ -46,5 +47,10 @@ public class SimulationResource : MonoBehaviour
             res.transform.parent = this.transform;
             resource = res;
         }
+    }
+
+    void OnGetMouseButtonDown()
+    {
+        print("ugh");
     }
 }
