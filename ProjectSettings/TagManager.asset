@@ -8,6 +8,10 @@ TagManager:
   - boundary
   - foodB
   - SimulationResource
+  - Wood
+  - wallnutCollider
+  - wormB
+  - nutB
   layers:
   - Default
   - TransparentFX

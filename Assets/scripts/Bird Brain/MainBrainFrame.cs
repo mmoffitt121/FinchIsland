@@ -13,6 +13,9 @@ public class MainBrainFrame : Agent {
     public float yawSpeed = 100f;
 
     public Transform beakTip;
+    public float beakThickness = 0f;
+
+    //bird beak thickness (worm = long thin, wallnut = short thick )
 
     private float smoothPitchChange = 0f;
     private float smoothYawChange = 0f;
@@ -26,10 +29,13 @@ public class MainBrainFrame : Agent {
 
     private MainIslandArea islandArea;
     private WallNUT nearestNut;
+    private Worms nearestworm;
 
     private bool frozen = false;
 
     public float checkNut { get; private set; }
+    public float checkWorm { get; private set; }
+   //public float BeakThickness { get => beakThickness; set => beakThickness = value; }
 
     public override void Initialize() {
         rigidbody = GetComponent<Rigidbody>();
@@ -43,6 +49,7 @@ public class MainBrainFrame : Agent {
     public override void OnEpisodeBegin() {
         if (Testing) {
             islandArea.ResetNut();
+            islandArea.ResetWorm();
         }
 
         checkNut = 0f;
@@ -50,6 +57,7 @@ public class MainBrainFrame : Agent {
         rigidbody.angularVelocity = Vector3.zero;
 
         UpdateNearestNut();
+        UpdateNearestWorm();
     }
 
 
@@ -80,11 +88,13 @@ public class MainBrainFrame : Agent {
             sensor.AddObservation(new float[10]);
             return;
         }
+
+        //sensors for wallnuts
         sensor.AddObservation(transform.localRotation.normalized);
-        Vector3 toNut = nearestNut.foodCenter - beakTip.position;
+        Vector3 toNut = nearestNut.wallnutCenter - beakTip.position;
         sensor.AddObservation(toNut.normalized);
-        sensor.AddObservation(Vector3.Dot(toNut.normalized, -nearestNut.foodVectorUP.normalized));
-        sensor.AddObservation(Vector3.Dot(beakTip.forward.normalized, -nearestNut.foodVectorUP.normalized));
+        sensor.AddObservation(Vector3.Dot(toNut.normalized, -nearestNut.wallnutVectorUP.normalized));
+        sensor.AddObservation(Vector3.Dot(beakTip.forward.normalized, -nearestNut.wallnutVectorUP.normalized));
         sensor.AddObservation(toNut.magnitude / MainIslandArea.AreaDiameter);
     }
 
@@ -154,6 +164,29 @@ public class MainBrainFrame : Agent {
             }
         }
     }
+
+    private void UpdateNearestWorm()
+    {
+        foreach (Worms worm in islandArea.Worm)
+        {
+            if(nearestworm == null && worm.AmountinWorm)
+            {
+                nearestworm = worm;
+            }
+            else if (worm.AmountinWorm)
+            {
+                float distanceToWorm = Vector3.Distance(worm.transform.position, beakTip.position);
+                float distCurrent = Vector3.Distance(nearestworm.transform.position, beakTip.position);
+
+                if(!nearestworm.AmountinWorm || distanceToWorm < distCurrent)
+                {
+                    nearestworm = worm;
+                }
+            }
+
+
+        }
+    }
     private void OnTriggerEnter(Collider other) {
 
         TriggerEnterOrStay(other);
@@ -167,7 +200,7 @@ public class MainBrainFrame : Agent {
     private void TriggerEnterOrStay(Collider collider) {
         //Check if colliding with nut, Continues because of Trigger.
 
-        if (collider.CompareTag("food")) {
+        if (collider.CompareTag("wallnutCollider")) {
 
             Vector3 closestPointToBeakTip = collider.ClosestPoint(beakTip.position);
 
@@ -181,15 +214,50 @@ public class MainBrainFrame : Agent {
                 if (Testing) {
                     rigidbody.isKinematic = true;
 
-                    float bonus = .02f * Mathf.Clamp01(Vector3.Dot(transform.forward.normalized, -nearestNut.foodVectorUP.normalized));
+                    float bonus = .02f * Mathf.Clamp01(Vector3.Dot(transform.forward.normalized, -nearestNut.wallnutVectorUP.normalized));
+                    //check wallnut thickness and bird beak thick
                     AddReward(.01f + bonus);
-                    print("add reward");
+                    print("add reward for nut" );
                     // Increase the scale of the bird object (Just for testing).
                     //transform.localScale += new Vector3(0.01f, 0.01f, 0.01f);
                 }
 
                 if (!wallnut.AmountinWalnut) {
                     UpdateNearestNut();
+                }
+
+                rigidbody.isKinematic = false;
+
+            }
+
+        }
+        else if (collider.CompareTag("Wood"))
+        {
+            Vector3 closestPointToBeakTip = collider.ClosestPoint(beakTip.position);
+
+            if (Vector3.Distance(beakTip.position, closestPointToBeakTip) < BeakTipRadius)
+            {
+                Worms worm = islandArea.GetWorms(collider);
+                float eaten = worm.Feed(.01f);
+
+
+                checkNut += eaten;
+
+                if (Testing)
+                {
+                    rigidbody.isKinematic = true;
+
+                    float bonus = .02f * Mathf.Clamp01(Vector3.Dot(transform.forward.normalized, -nearestworm.wormVectorUP.normalized));
+                    //check wallnut thickness and bird beak thick
+                    AddReward(.01f + bonus);
+                    print("add reward for worm");
+                    // Increase the scale of the bird object (Just for testing).
+                    //transform.localScale += new Vector3(0.01f, 0.01f, 0.01f);
+                }
+
+                if (!worm.AmountinWorm)
+                {
+                    UpdateNearestWorm();
                 }
 
                 rigidbody.isKinematic = false;
@@ -220,7 +288,7 @@ public class MainBrainFrame : Agent {
 
     private void Update() {
         if (nearestNut != null) {
-            Debug.DrawLine(beakTip.position, nearestNut.foodCenter, Color.green);
+            Debug.DrawLine(beakTip.position, nearestNut.wallnutCenter, Color.green);
         }
     }
 
