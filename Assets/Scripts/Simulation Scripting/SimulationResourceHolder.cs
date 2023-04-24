@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -14,6 +15,13 @@ public class SimulationResourceHolder : MonoBehaviour
     public void SetSelected(int selected)
     {
         this.selected = selected;
+        foreach (PlaceableItemUI pi in FindObjectsByType<PlaceableItemUI>(FindObjectsSortMode.None))
+        {
+            if (pi.index != selected)
+            {
+                pi.Deselect();
+            }
+        }
     }
 
     public void LoadObjectOptions()

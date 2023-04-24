@@ -22,6 +22,7 @@ public class PlaceableItemUI : MonoBehaviour
 
     public void Select()
     {
+        placing.SetActive(true);
         FindObjectOfType<SimulationResourceHolder>().SetSelected(index);
     }
 

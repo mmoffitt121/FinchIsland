@@ -56,6 +56,7 @@ public class SimulationManager : MonoBehaviour
     {
         stepLabel.text = "Set Up Environment";
         setupEnvironmentStep.SetActive(true);
+        SetSimulationObjectGlowEffects(true);
     }
 
     public void DisplayRunSimulationUI()
@@ -77,6 +78,15 @@ public class SimulationManager : MonoBehaviour
         runSimulationStep.SetActive(false);
         viewResultsStep.SetActive(false);
         viewResultsFinch.SetActive(false);
+        SetSimulationObjectGlowEffects(false);
+    }
+
+    public void SetSimulationObjectGlowEffects(bool glow)
+    {
+        foreach (SimulationResource sr in FindObjectsByType<SimulationResource>(FindObjectsSortMode.None))
+        {
+            sr.particleEmitter.SetActive(glow);
+        }
     }
 
     public void Start()
