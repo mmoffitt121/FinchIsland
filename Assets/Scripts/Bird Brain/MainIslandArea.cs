@@ -9,15 +9,15 @@ public class MainIslandArea : MonoBehaviour
     //list of all nuts in area with dictionary
     private List<GameObject> nuts;
     private Dictionary<Collider, WallNUT> nutDictionary;
+    public WallNUT nutcollider;
 
     //List of all worms in area with dictionary 
-    private List<GameObject> worms;
-    private Dictionary<Collider, Worms> wormDictionary;
+    //private List<GameObject> worms;
+    //private Dictionary<Collider, Worms> wormDictionary;
 
     //list of all wallnuts
     public List<WallNUT> Wallnuts { get; private set; }
-    public List<Worms> Worm { get; private set; }
-
+    //public List<Worms> Worm { get; private set; }
     public void ResetNut()
     {
         foreach (GameObject nut in nuts)
@@ -34,7 +34,7 @@ public class MainIslandArea : MonoBehaviour
         }
     }
 
-    public void ResetWorm()
+   /* public void ResetWorm()
     {
         foreach (GameObject worm in worms)
         {
@@ -50,26 +50,26 @@ public class MainIslandArea : MonoBehaviour
         }
     }
 
-
-    public WallNUT GetFood (Collider wallnutCollider)
+    */
+    public WallNUT GetFood (Collider collider)
     {
-        return nutDictionary[wallnutCollider];
+          return nutDictionary[collider];
     }
 
-    public Worms GetWorms (Collider WormCollider)
+   /* public Worms GetWorms (Collider collider)
     {
-        return wormDictionary[WormCollider];
+        return wormDictionary[collider];
     }
-
+   */
     private void Awake()
     {
         nuts = new List<GameObject>();
         nutDictionary = new Dictionary<Collider, WallNUT>();
         Wallnuts = new List<WallNUT>();
 
-        worms = new List<GameObject>();
+       /* worms = new List<GameObject>();
         wormDictionary = new Dictionary<Collider, Worms>();
-        Worm = new List<Worms>();
+        Worm = new List<Worms>();*/
     }
 
     private void Start()
@@ -77,7 +77,8 @@ public class MainIslandArea : MonoBehaviour
         FindChildFood(transform);
     }
 
-    private void FindChildFood (Transform parent)
+
+    public void FindChildFood (Transform parent)
     {
         for(int i = 0; i < parent.childCount; i++)
         {
@@ -85,37 +86,40 @@ public class MainIslandArea : MonoBehaviour
             if (child.CompareTag("wallnutCollider"))
             {
                 nuts.Add(child.gameObject);
+               
                 FindChildFood(child);
             }
-            else if (child.CompareTag("Wood"))
+           /* else if (child.CompareTag("Wood"))
             {
                 worms.Add(child.gameObject);
                 FindChildFood(child);
-            }
+            }*/
 
             else
             {
                 WallNUT wallnut = child.GetComponent<WallNUT>();
-                Worms worm = child.GetComponent<Worms>();
+               // Worms worm = child.GetComponent<Worms>();
                 if (wallnut != null)
                 {
                     Wallnuts.Add(wallnut);
                     nutDictionary.Add(wallnut.wallnutCollider, wallnut);
                 }
       
-                else if(worm != null)
+               /* else if(worm != null)
                 {
                     Worm.Add(worm);
                     wormDictionary.Add(worm.WormCollider, worm);
-                }
+                }*/
 
                 else
                 {
                     FindChildFood(child);
                 }
 
+
             }
         }
+
     }
 
 }

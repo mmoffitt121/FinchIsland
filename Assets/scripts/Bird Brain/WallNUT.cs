@@ -54,6 +54,7 @@ public class WallNUT : MonoBehaviour
 
             //Disable collider eventually
             wallnutCollider.gameObject.SetActive(false);
+            wallnutBlocker.gameObject.SetActive(false);
 
 
             //printing to see if eaten
@@ -72,6 +73,7 @@ public class WallNUT : MonoBehaviour
 
         //enable collider eventually
         wallnutCollider.gameObject.SetActive(true);
+        wallnutBlocker.gameObject.SetActive(true);
 
         print("food is full");
     }
@@ -83,8 +85,8 @@ public class WallNUT : MonoBehaviour
         nutMaterial = meshRenderer.material;
 
         //finding wallnut collider NEED TO FIX
-       // wallnutCollider = transform.Find("wallnutCollider").GetComponent<Collider>();
-        //foodBlocker = transform.Find("foodBlocker").GetComponent<Collider>();
+        wallnutCollider = transform.Find("wallnutCollider").GetComponent<Collider>();
+        wallnutBlocker = transform.Find("blocker").GetComponent<Collider>();
 
 
     }
