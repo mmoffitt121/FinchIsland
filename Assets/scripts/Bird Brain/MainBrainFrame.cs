@@ -20,7 +20,7 @@ public class MainBrainFrame : Agent {
     private float smoothPitchChange = 0f;
     private float smoothYawChange = 0f;
     private const float MaxPitchAngle = 80f;
-    private const float BeakTipRadius = 0.05f;
+    private const float BeakTipRadius = 0.1f;
     //we are using the whole bird. Need to add a beak collider
     // private const float beakAngle = 80f;
     public Camera geraldPOV;
@@ -29,7 +29,7 @@ public class MainBrainFrame : Agent {
 
     private MainIslandArea islandArea;
     private WallNUT nearestNut;
-    private Worms nearestworm;
+   // private Worms nearestworm;
 
     private bool frozen = false;
 
@@ -49,7 +49,7 @@ public class MainBrainFrame : Agent {
     public override void OnEpisodeBegin() {
         if (Testing) {
             islandArea.ResetNut();
-            islandArea.ResetWorm();
+            //islandArea.ResetWorm();
         }
 
         checkNut = 0f;
@@ -57,7 +57,7 @@ public class MainBrainFrame : Agent {
         rigidbody.angularVelocity = Vector3.zero;
 
         UpdateNearestNut();
-        UpdateNearestWorm();
+       // UpdateNearestWorm();
     }
 
 
@@ -165,7 +165,7 @@ public class MainBrainFrame : Agent {
         }
     }
 
-    private void UpdateNearestWorm()
+  /*  private void UpdateNearestWorm()
     {
         foreach (Worms worm in islandArea.Worm)
         {
@@ -186,7 +186,7 @@ public class MainBrainFrame : Agent {
 
 
         }
-    }
+    }*/
     private void OnTriggerEnter(Collider other) {
 
         TriggerEnterOrStay(other);
@@ -231,7 +231,7 @@ public class MainBrainFrame : Agent {
             }
 
         }
-        else if (collider.CompareTag("Wood"))
+       /* else if (collider.CompareTag("Wood"))
         {
             Vector3 closestPointToBeakTip = collider.ClosestPoint(beakTip.position);
 
@@ -264,7 +264,7 @@ public class MainBrainFrame : Agent {
 
             }
 
-        }
+        }*/
     }
 
     private void OnCollisionEnter(Collision collision) {
@@ -277,7 +277,7 @@ public class MainBrainFrame : Agent {
         else if (Testing && collision.collider.CompareTag("boundary")) {
             rigidbody.isKinematic = true;
             //Need to add reward system
-            print("remove reward");
+            print("remove reward AND HIT BOUNDARY");
             AddReward(-.5f);
             
         }
@@ -294,8 +294,7 @@ public class MainBrainFrame : Agent {
 
     private void FixedUpdate() {
         if (nearestNut != null && !nearestNut.AmountinWalnut) {
-            UpdateNearestNut();
-        }
+            UpdateNearestNut();        }
     }
 }
 
