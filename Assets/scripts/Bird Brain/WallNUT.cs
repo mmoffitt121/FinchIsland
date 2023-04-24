@@ -4,31 +4,36 @@ using UnityEngine;
 
 public class WallNUT : MonoBehaviour
 {
-    [HideInInspector]
-    public Collider foodCollider;
-    public Collider foodBlocker;
-    public Material foodMaterial;
+    //colliders for the wallnut
+    public Collider wallnutCollider;
+    public Collider wallnutBlocker;
+    public Material nutMaterial;
 
-    //Start of finding food?
 
-    public Vector3 foodVectorUP
+
+    //Start of finding food
+
+    public Vector3 wallnutVectorUP
     {
         get
         {
-            return foodCollider.transform.up;
+            return wallnutCollider.transform.up;
         }
     }
 
-    public Vector3 foodCenter
+    public Vector3 wallnutCenter
     {
         get
         {
-            return foodCollider.transform.position;
+            return wallnutCollider.transform.position;
         }
     }
+
+
 
     //is walnut empty
     public float checkNut { get; private set; }
+  
 
     public bool AmountinWalnut
     {
@@ -41,20 +46,24 @@ public class WallNUT : MonoBehaviour
     public float Feed(float amount)
     {
         float eaten = Mathf.Clamp(amount, 0f, checkNut);
+      
         checkNut -= amount;
         if(checkNut <= 0)
         {
             checkNut = 0;
 
             //Disable collider eventually
-            foodCollider.gameObject.SetActive(false);
+            wallnutCollider.gameObject.SetActive(false);
 
 
             //printing to see if eaten
             print("gobbled the nut");
+
         }
 
+
         return eaten;
+
     }
 
     public void ResetNut()
@@ -62,7 +71,7 @@ public class WallNUT : MonoBehaviour
         checkNut = 1f;
 
         //enable collider eventually
-        foodCollider.gameObject.SetActive(true);
+        wallnutCollider.gameObject.SetActive(true);
 
         print("food is full");
     }
@@ -71,10 +80,10 @@ public class WallNUT : MonoBehaviour
     {
         //Finding mesh rendered and  material 
         MeshRenderer meshRenderer = GetComponent<MeshRenderer>();
-        foodMaterial = meshRenderer.material;
+        nutMaterial = meshRenderer.material;
 
-        //finding wallnut collider
-        foodCollider = transform.Find("foodCollider").GetComponent<Collider>();
+        //finding wallnut collider NEED TO FIX
+       // wallnutCollider = transform.Find("wallnutCollider").GetComponent<Collider>();
         //foodBlocker = transform.Find("foodBlocker").GetComponent<Collider>();
 
 
