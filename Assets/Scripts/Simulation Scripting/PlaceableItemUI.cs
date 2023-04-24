@@ -15,6 +15,7 @@ public class PlaceableItemUI : MonoBehaviour
     public GameObject placing;
     public int index;
 
+    // Sets the name of the placeable item
     public void SetName(string name)
     {
         itemNameField.text = name;

@@ -16,6 +16,7 @@ public class SimulationManager : MonoBehaviour
 
     public SimulationStep step;
 
+    // Advances the step
     public void AdvanceStep(int stepTo = -1)
     {
         // If we are in a lesson plan, and we're at the end of the allotted runs, end.
