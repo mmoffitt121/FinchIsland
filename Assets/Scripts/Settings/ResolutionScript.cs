@@ -19,22 +19,16 @@ public class ResolutionScript : MonoBehaviour
 
         resolutionDropdown.ClearOptions();
 
+        List<string> options = new List<string>();
         for(int i=0; i < resolutions.Length; i++)
         {
-            Debug.Log("Resolution: " + resolutions[i]);
-        }
-
-        List<string> options = new List<string>();
-        for(int i=0; i < filteredResolutions.Count; i++)
-        {
-            string resolitionOption = filteredResolutions[i].width + "x" + filteredResolutions[i].height;
+            string resolitionOption = resolutions[i].width + "x" + resolutions[i].height;
             options.Add(resolitionOption);
-            if (filteredResolutions[i].width == Screen.width && filteredResolutions[i].height == Screen.height)
+            if (resolutions[i].width == Screen.width && resolutions[i].height == Screen.height)
             {
                 currentResolutionIndex = i;
             }
         }
-
         resolutionDropdown.AddOptions(options);
         resolutionDropdown.value = currentResolutionIndex;
     }
@@ -42,7 +36,7 @@ public class ResolutionScript : MonoBehaviour
 
     public void SetResolution(int resolutionIndex)
     {
-        Resolution resolution = filteredResolutions[resolutionIndex];
+        Resolution resolution = resolutions[resolutionIndex];
         Screen.SetResolution(resolution.width, resolution.height, true);
     }
 
