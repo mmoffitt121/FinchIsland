@@ -5,4 +5,8 @@ using UnityEngine;
 public class LessonNodeWrapper : MonoBehaviour
 {
     public LessonNode node;
+    public void SetNode(LessonNode node)
+    {
+        this.node = node;
+    }
 }

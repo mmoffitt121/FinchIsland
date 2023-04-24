@@ -2,45 +2,288 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
-
+using System.Linq;
+using System;
+using System.Globalization;
+using Unity.VisualScripting;
+using TMPro;
+using OpenAI;
+using UnityEngine.UI;
+using TMPro.EditorUtilities;
 
 public class LessonPlanUI : MonoBehaviour
 {
+    // Prefab for spawning lesson plan UI
     public GameObject lessonPlanPrefab;
+    // The gameobject displaying the list of lesson plans
     public GameObject lessonPlanList;
+    // The list of all lesson plans
+    public LessonPlan[] lessonPlans;
+    // The lesson plan currently selected for editing
     public LessonPlan lessonPlan;
 
+    // The Lesson Plan Editor UI
+    public GameObject lessonPlanEditor;
+    // The Lesson Plan Viewer UI
+    public GameObject lessonPlanViewer;
+
+    // The title viewed in the editor
+    public TextMeshProUGUI lessonPlanEditorTitle;
+
+    // UI that controls the properties of the lesson plan
+    public GameObject lessonProperties;
+    // UI that controls the properties of the quiz
+    public GameObject quizProperties;
+    // UI that controls the properties of the simulation
+    public GameObject simulationProperties;
+    // UI that controls the properties of the article
+    public GameObject articleProperties;
+
+    // Prefab for spawning lesson plan nodes
+    public GameObject nodePrefab;
+    // The gameobject displaying the list of nodes
+    public GameObject nodeList;
+
+    // Fields for the name and description of the lesson plan
+    public TMP_InputField planNameInput;
+    public TMP_InputField planDescriptionInput;
+    public TextMeshProUGUI planNameField;
+    public TextMeshProUGUI planDescriptionField;
+
+    #region Editor
+    public void AddQuizNode()
+    {
+        AddNode(NodeType.Quiz);
+    }
+
+    public void AddSimulationNode()
+    {
+        AddNode(NodeType.Simulation);
+    }
+
+    public void AddArticleNode()
+    {
+        AddNode(NodeType.Article);
+    }
+
+    public void AddNode(NodeType type)
+    {
+        LessonNode n = new LessonNode();
+        n.type = type;
+        lessonPlan.nodes.Add(n);
+        DisplayNodes();
+    }
+
+    public void LoadLessonPlan()
+    {
+
+    }
+
+    // Shows all lesson plans in the UI to the user
+    public void DisplayNodes()
+    {
+        RemoveNodeDisplay();
+        foreach (LessonNode node in lessonPlan.nodes)
+        {
+            GameObject n = Instantiate(nodePrefab);
+            n.transform.SetParent(nodeList.transform, false);
+            n.GetComponent<LessonNodeWrapper>().SetNode(node);
+        }
+    }
+
+    // Removes all lesson plans from the display
+    public void RemoveNodeDisplay()
+    {
+        foreach (Transform child in nodeList.transform)
+        {
+            Destroy(child.gameObject);
+        }
+    }
+
+    public void ChooseNodeTypeToEdit(EditNodeType nodeType)
+    {
+        lessonProperties.SetActive(false);
+        quizProperties.SetActive(false);
+        simulationProperties.SetActive(false);
+        articleProperties.SetActive(false);
+        switch (nodeType)
+        {
+            case EditNodeType.LessonPlan:
+                lessonProperties.SetActive(true);
+                break;
+            case EditNodeType.Quiz:
+                quizProperties.SetActive(true);
+                break;
+            case EditNodeType.Simulation:
+                simulationProperties.SetActive(true);
+                break;
+            case EditNodeType.Article:
+                articleProperties.SetActive(true);
+                break;
+        }
+    }
+
+    public void CancelEdit()
+    {
+        lessonPlanEditor.SetActive(false);
+        lessonPlanViewer.SetActive(true);
+        LoadLessonPlanList();
+    }
+
+    public void SaveEdit()
+    {
+        lessonPlan.name = planNameField.text;
+        lessonPlan.description = planDescriptionField.text;
+        print(lessonPlan.name +  " " + lessonPlan.id);
+        print(lessonPlans[4].name);
+        lessonPlanEditor.SetActive(false);
+        lessonPlanViewer.SetActive(true);
+        SaveLessonPlanList();
+        LoadLessonPlanList();
+        DisplayLessonPlans();
+    }
+    #endregion
+
+    #region Viewer
+    // Adds a lesson plan to the list and the screen.
     public void CreateLessonPlan()
     {
-        GameObject lp = Instantiate(lessonPlanPrefab);
-        lp.transform.SetParent(lessonPlanList.transform, false);
+        LessonPlan newLesson = new LessonPlan();
+        newLesson.id = GetUniqueId();
+        newLesson.createdDate = DateTime.Today.ToString("d");
+        newLesson.name = "Lesson Plan " + newLesson.id;
+        newLesson.description = "";
+        lessonPlans = lessonPlans.Append(newLesson).ToArray();
+        DisplayLessonPlans();
+        SaveLessonPlanList();
     }
 
     public void EditLessonPlan(LessonPlan lp)
     {
         lessonPlan = lp;
+        lessonPlanEditor.SetActive(true);
+        lessonPlanViewer.SetActive(false);
+        lessonPlanEditorTitle.text = lessonPlan.name;
+        planNameInput.text = lp.name;
+        planDescriptionInput.text = lp.description;
+        print(planNameField.text);
+        DisplayNodes();
+    }
+
+    public void DeleteLessonPlan(LessonPlan lp)
+    {
+        List<LessonPlan> temp = lessonPlans.ToList();
+        temp.Remove(lp);
+        lessonPlans = temp.ToArray();
+        SaveLessonPlanList();
+        DisplayLessonPlans();
     }
 
     public void SaveLessonPlanList()
     {
-        string json = JsonUtility.ToJson(lessonPlan);
+        string[] filePaths = Directory.GetFiles(Application.persistentDataPath + "/Lesson Plans");
+        foreach (string file in filePaths)
+        {
+            if (File.Exists(file))
+            {
+                File.Delete(file);
+            }
+        }
 
-        string filePath = Application.persistentDataPath + "/lessonplanlist.json";
-        File.WriteAllText(filePath, json);
+        foreach (LessonPlan l in lessonPlans)
+        {
+            string json = JsonUtility.ToJson(l);
+            string filePath = Application.persistentDataPath + "/Lesson Plans";
+            if (!File.Exists(filePath)) { Directory.CreateDirectory(filePath); }
+            File.WriteAllText(filePath + "/Lesson Plan_" + l.id + "_" + l.name + ".json", json);
+        }
     }
 
+    // Loads the list of lesson plans from the user's json.
     public void LoadLessonPlanList()
     {
-        string filePath = Application.persistentDataPath + "/lessonplanlist.json";
-        if (File.Exists(filePath))
+        List<LessonPlan> lps = new List<LessonPlan>();
+        string[] filePaths = Directory.GetFiles(Application.persistentDataPath + "/Lesson Plans");
+        foreach (string file in filePaths)
         {
-            string json = File.ReadAllText(filePath);
-            lessonPlan = JsonUtility.FromJson<LessonPlan>(json);
+            if (File.Exists(file))
+            {
+                string json = File.ReadAllText(file);
+                lps.Add(JsonUtility.FromJson<LessonPlan>(json));
+                print(lps.Last().id + " " + lps.Last().name);
+            }
         }
-        // If you're gonna save and load multiple lesson plans, put this in a foreach
-        GameObject lp = GameObject.Instantiate(lessonPlanPrefab);
-        lp.transform.SetParent(lessonPlanList.transform, false);
-        lp.GetComponent<LessonPlanWrapper>().lessonPlan = lessonPlan; // Sets that lesson plan to the prefab object
+
+        lessonPlans = lps.ToArray();
+    }
+
+    // Shows all lesson plans in the UI to the user
+    public void DisplayLessonPlans()
+    {
+        RemoveLessonPlanDisplay();
+        foreach (LessonPlan plan in lessonPlans)
+        {
+            GameObject lp = Instantiate(lessonPlanPrefab);
+            lp.transform.SetParent(lessonPlanList.transform, false);
+            lp.GetComponent<LessonPlanWrapper>().SetLessonPlan(plan);
+        }
+    }
+
+    // Removes all lesson plans from the display
+    public void RemoveLessonPlanDisplay()
+    {
+        foreach (Transform child in lessonPlanList.transform)
+        {
+            Destroy(child.gameObject);
+        }
+    }
+
+    // Function to get unique lesson plan ID from the array of lesson plans
+    public int GetUniqueId()
+    {
+        int i = 0;
+        bool found = true;
+        while (true)
+        {
+            foreach (LessonPlan lp in lessonPlans)
+            {
+                if (lp.id == i)
+                {
+                    found = false;
+                    break;
+                }
+            }
+
+            if (found)
+            {
+                return i;
+            }
+            found = true;
+            i++;
+        }
+    }
+    #endregion
+
+    private void Start()
+    {
+        LoadLessonPlanList();
+        DisplayLessonPlans();
     }
 }
 
+[Serializable]
+public enum EditNodeType
+{
+    LessonPlan,
+    Quiz,
+    Simulation,
+    Article
+}
+
+[Serializable]
+public enum NodeType
+{
+    Simulation,
+    Article,
+    Quiz
+}
