@@ -47,7 +47,7 @@ public class MainBrainFrame : Agent {
     }
 
     public override void OnEpisodeBegin() {
-        if (Testing) {
+        /*if (Testing) {
             islandArea.ResetNut();
             islandArea.ResetWorm();
         }
@@ -57,7 +57,7 @@ public class MainBrainFrame : Agent {
         rigidbody.angularVelocity = Vector3.zero;
 
         UpdateNearestNut();
-        UpdateNearestWorm();
+        UpdateNearestWorm();*/
     }
 
 
