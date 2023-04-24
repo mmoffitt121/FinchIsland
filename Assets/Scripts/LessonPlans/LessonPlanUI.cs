@@ -9,8 +9,6 @@ using Unity.VisualScripting;
 using TMPro;
 using OpenAI;
 using UnityEngine.UI;
-using TMPro.EditorUtilities;
-using static TreeEditor.TreeEditorHelper;
 using JetBrains.Annotations;
 
 public class LessonPlanUI : MonoBehaviour
