@@ -28,6 +28,7 @@ public class Login_Script : MonoBehaviour
 
     public void captureCredentials() 
     {
+        // get username and password from login page
         string userName = usernameField.text;
         string password = passwordField.text;
         passwordManager = new PasswordManager();
@@ -36,11 +37,12 @@ public class Login_Script : MonoBehaviour
 
         if (userName != "sysAdmin" && password != "sysAdmin")
         {
+            // if not sysadmin
             StartCoroutine(passwordManager.Login(userName, password, s => data = s));
         }
         else
         {
-            // if sysadmin, dont access mysql
+            // if sysadmin, dont access mysql, NEEDS CLOUD IMPLEMENTATION TO WORK
             /*
             string path = Environment.CurrentDirectory + "\\save\\current_user.txt";
 
