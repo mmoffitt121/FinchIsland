@@ -13,6 +13,7 @@ public class LessonNode
     public NodeType type;
 
     // Simulation Node Items
+    public int runs;
 
     // Quiz Node Items
     public QuizQuestion[] questions;
@@ -20,4 +21,10 @@ public class LessonNode
     // Article Node Items
     public string articleTitle;
     public string articleContent;
+
+    public LessonNode()
+    {
+        articleTitle = string.Empty;
+        articleContent = string.Empty;
+    }
 }

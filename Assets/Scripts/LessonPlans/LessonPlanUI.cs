@@ -10,6 +10,7 @@ using TMPro;
 using OpenAI;
 using UnityEngine.UI;
 using TMPro.EditorUtilities;
+using static TreeEditor.TreeEditorHelper;
 
 public class LessonPlanUI : MonoBehaviour
 {
@@ -49,6 +50,12 @@ public class LessonPlanUI : MonoBehaviour
     public TMP_InputField planDescriptionInput;
     public TextMeshProUGUI planNameField;
     public TextMeshProUGUI planDescriptionField;
+
+    // The currently selected lesson node
+    public LessonNode node;
+
+    public TMP_InputField articleNameInput;
+    public TMP_InputField articleContentInput;
 
     #region Editor
     public void AddQuizNode()
@@ -100,6 +107,7 @@ public class LessonPlanUI : MonoBehaviour
         }
     }
 
+    // Function called to choose which type of node we are editing
     public void ChooseNodeTypeToEdit(EditNodeType nodeType)
     {
         lessonProperties.SetActive(false);
@@ -118,11 +126,14 @@ public class LessonPlanUI : MonoBehaviour
                 simulationProperties.SetActive(true);
                 break;
             case EditNodeType.Article:
+                articleNameInput.text = node.articleTitle;
+                articleContentInput.text = node.articleContent;
                 articleProperties.SetActive(true);
                 break;
         }
     }
 
+    // Function called to cancel the user's changes
     public void CancelEdit()
     {
         lessonPlanEditor.SetActive(false);
@@ -130,17 +141,38 @@ public class LessonPlanUI : MonoBehaviour
         LoadLessonPlanList();
     }
 
+    // Function called to save the user's changes
     public void SaveEdit()
     {
         lessonPlan.name = planNameField.text;
         lessonPlan.description = planDescriptionField.text;
-        print(lessonPlan.name +  " " + lessonPlan.id);
-        print(lessonPlans[4].name);
         lessonPlanEditor.SetActive(false);
         lessonPlanViewer.SetActive(true);
         SaveLessonPlanList();
         LoadLessonPlanList();
         DisplayLessonPlans();
+    }
+
+    // Function called to delete a specific lesson node
+    public void DeleteNode(LessonNode node)
+    {
+        lessonPlan.nodes.Remove(node);
+        DisplayNodes();
+    }
+
+    public void SaveArticle()
+    {
+        node.articleTitle = articleNameInput.text;
+        node.articleContent = articleContentInput.text;
+        DisplayNodes();
+        ChooseNodeTypeToEdit(EditNodeType.LessonPlan);
+    }
+
+    // Function called to edit a particular lesson node
+    public void EditNode(LessonNode node)
+    {
+        this.node = node;
+        ChooseNodeTypeToEdit((EditNodeType)node.type);
     }
     #endregion
 
@@ -166,7 +198,6 @@ public class LessonPlanUI : MonoBehaviour
         lessonPlanEditorTitle.text = lessonPlan.name;
         planNameInput.text = lp.name;
         planDescriptionInput.text = lp.description;
-        print(planNameField.text);
         DisplayNodes();
     }
 
@@ -210,7 +241,6 @@ public class LessonPlanUI : MonoBehaviour
             {
                 string json = File.ReadAllText(file);
                 lps.Add(JsonUtility.FromJson<LessonPlan>(json));
-                print(lps.Last().id + " " + lps.Last().name);
             }
         }
 
@@ -274,10 +304,10 @@ public class LessonPlanUI : MonoBehaviour
 [Serializable]
 public enum EditNodeType
 {
-    LessonPlan,
-    Quiz,
     Simulation,
-    Article
+    Article,
+    Quiz,
+    LessonPlan
 }
 
 [Serializable]

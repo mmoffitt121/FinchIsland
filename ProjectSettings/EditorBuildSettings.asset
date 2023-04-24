@@ -38,4 +38,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Lesson4.unity
     guid: 1d411739caa750c44873149171400b3b
+  - enabled: 1
+    path: Assets/Scenes/Lesson Plan Complete.unity
+    guid: c90325443959ebb43b8f2f1748d39814
+  - enabled: 1
+    path: Assets/Scenes/Article.unity
+    guid: 5a824108ac1b6c7488eb7004f034ca37
+  - enabled: 1
+    path: Assets/Scenes/Quiz.unity
+    guid: 5e84b137e08e185489973d90c115acfa
   m_configObjects: {}
