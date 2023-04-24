@@ -43,6 +43,7 @@ public class SimulationResource : MonoBehaviour
 
             GameObject res = Instantiate(holder.possibleResources[holder.selected]);
             res.transform.position = this.transform.position;
+            res.transform.rotation = this.transform.rotation;
             res.transform.parent = this.transform;
             resource = res;
         }

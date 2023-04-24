@@ -9,6 +9,7 @@ public class SimulationManager : MonoBehaviour
     public GameObject setupEnvironmentStep;
     public GameObject runSimulationStep;
     public GameObject viewResultsStep;
+    public GameObject viewResultsFinch;
 
     public Button nextButton;
     public TextMeshProUGUI stepLabel;
@@ -55,6 +56,7 @@ public class SimulationManager : MonoBehaviour
     {
         stepLabel.text = "Set Up Environment";
         setupEnvironmentStep.SetActive(true);
+        SetSimulationObjectGlowEffects(true);
     }
 
     public void DisplayRunSimulationUI()
@@ -67,6 +69,7 @@ public class SimulationManager : MonoBehaviour
     {
         stepLabel.text = "Results";
         viewResultsStep.SetActive(true);
+        viewResultsFinch.SetActive(true);
     }
 
     public void DisableUIElements()
@@ -74,6 +77,16 @@ public class SimulationManager : MonoBehaviour
         setupEnvironmentStep.SetActive(false);
         runSimulationStep.SetActive(false);
         viewResultsStep.SetActive(false);
+        viewResultsFinch.SetActive(false);
+        SetSimulationObjectGlowEffects(false);
+    }
+
+    public void SetSimulationObjectGlowEffects(bool glow)
+    {
+        foreach (SimulationResource sr in FindObjectsByType<SimulationResource>(FindObjectsSortMode.None))
+        {
+            sr.particleEmitter.SetActive(glow);
+        }
     }
 
     public void Start()

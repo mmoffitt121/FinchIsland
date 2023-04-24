@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: 47bfaf20a55dbe541ae42543ddc47828
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - Classica
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: f66ecd0572140e2408457064b489448b, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

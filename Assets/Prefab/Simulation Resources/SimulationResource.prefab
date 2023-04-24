@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2534178193695574234}
   - component: {fileID: 8586090445377611175}
   - component: {fileID: 2533667999195499956}
+  - component: {fileID: 2905846376622869730}
   m_Layer: 0
   m_Name: SimulationResource
   m_TagString: Untagged
@@ -112,6 +113,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   resource: {fileID: 0}
+  particleEmitter: {fileID: 8255069987499272547}
+--- !u!54 &2905846376622869730
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3651892619781746201}
+  serializedVersion: 2
+  m_Mass: 0.0000001
+  m_Drag: 0
+  m_AngularDrag: 0
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
 --- !u!1 &8255069987499272547
 GameObject:
   m_ObjectHideFlags: 0

@@ -12,4 +12,20 @@ public class GeraldSpin : MonoBehaviour
             transform.rotation.eulerAngles.y + rotationSpeed, 
             transform.rotation.eulerAngles.z));
     }
+
+    private void Update()
+    {
+        if (Input.GetKey("left"))
+        {
+            rotationSpeed = 1;
+        }
+        else if (Input.GetKey("right"))
+        {
+            rotationSpeed = -1;
+        }
+        else
+        {
+            rotationSpeed = 0;
+        }
+    }
 }

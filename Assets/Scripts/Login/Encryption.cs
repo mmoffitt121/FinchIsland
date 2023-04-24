@@ -49,7 +49,7 @@ namespace Encryption
                     writer.WriteLine("Email: " + email);
                     writer.WriteLine("ID: " + parsedata[0]);
                 }
-                SceneManager.LoadScene(0);
+                SceneManager.LoadScene(1);
             }
             else
             {
