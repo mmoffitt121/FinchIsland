@@ -18,11 +18,21 @@ public class SimulationManager : MonoBehaviour
 
     public void AdvanceStep(int stepTo = -1)
     {
+        // If we are in a lesson plan, and we're at the end of the allotted runs, end.
+        if (LessonPlanScriptor.IsInLessonPlan() && LessonPlanScriptor.simulationRuns >= LessonPlanScriptor.GetCurrentNode().runs)
+        {
+            LessonPlanScriptor.HandleAdvance();
+        }
+
         // If we don't specify a step
         if (stepTo == -1)
         {
             // Moves to next step
             step = (SimulationStep)(((int)step + 1) % 3);
+            if (LessonPlanScriptor.IsInLessonPlan() && step == 0)
+            {
+                LessonPlanScriptor.simulationRuns++;
+            }
         }
         // If we specify a step
         else if (0 <= stepTo && stepTo < 3)

@@ -80,6 +80,7 @@ public static class LessonPlanScriptor
         if (lpProgress >= lessonPlan.nodes.Count)
         {
             SceneManager.LoadScene(11);
+            return;
         }
 
         switch(lessonPlan.nodes[lpProgress].type)

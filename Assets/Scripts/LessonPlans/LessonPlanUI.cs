@@ -11,6 +11,7 @@ using OpenAI;
 using UnityEngine.UI;
 using TMPro.EditorUtilities;
 using static TreeEditor.TreeEditorHelper;
+using JetBrains.Annotations;
 
 public class LessonPlanUI : MonoBehaviour
 {
@@ -54,8 +55,14 @@ public class LessonPlanUI : MonoBehaviour
     // The currently selected lesson node
     public LessonNode node;
 
+    // Inputs for the names and content of articles
     public TMP_InputField articleNameInput;
     public TMP_InputField articleContentInput;
+
+    // Input for the number of rounds in a simulation
+    public TMP_InputField simulationRoundsInput;
+    // String that allows us to analyze the value of the input to make sure it's valid.
+    private int simulationRoundsValue;
 
     #region Editor
     public void AddQuizNode()
@@ -79,11 +86,6 @@ public class LessonPlanUI : MonoBehaviour
         n.type = type;
         lessonPlan.nodes.Add(n);
         DisplayNodes();
-    }
-
-    public void LoadLessonPlan()
-    {
-
     }
 
     // Shows all lesson plans in the UI to the user
@@ -124,6 +126,8 @@ public class LessonPlanUI : MonoBehaviour
                 break;
             case EditNodeType.Simulation:
                 simulationProperties.SetActive(true);
+                simulationRoundsInput.text = node.runs.ToString();
+                simulationRoundsValue = node.runs;
                 break;
             case EditNodeType.Article:
                 articleNameInput.text = node.articleTitle;
@@ -174,6 +178,20 @@ public class LessonPlanUI : MonoBehaviour
         this.node = node;
         ChooseNodeTypeToEdit((EditNodeType)node.type);
     }
+
+    public void SetSimulationRounds()
+    {
+        int result;
+        if (Int32.TryParse(simulationRoundsInput.text, out result))
+        {
+            simulationRoundsValue = result;
+            node.runs = simulationRoundsValue;
+        }
+        else
+        {
+            simulationRoundsInput.text = simulationRoundsValue.ToString();
+        }
+    }
     #endregion
 
     #region Viewer
@@ -198,6 +216,7 @@ public class LessonPlanUI : MonoBehaviour
         lessonPlanEditorTitle.text = lessonPlan.name;
         planNameInput.text = lp.name;
         planDescriptionInput.text = lp.description;
+        ChooseNodeTypeToEdit(EditNodeType.LessonPlan);
         DisplayNodes();
     }
 

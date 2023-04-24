@@ -19,23 +19,16 @@ public class ResolutionScript : MonoBehaviour
 
         resolutionDropdown.ClearOptions();
 
-        for(int i=0; i < resolutions.Length; i++)
-        {
-            Debug.Log("Resolution: " + resolutions[i]);
-        }
-
         List<string> options = new List<string>();
         for(int i=0; i < resolutions.Length; i++)
         {
             string resolitionOption = resolutions[i].width + "x" + resolutions[i].height;
-            print(resolitionOption);
             options.Add(resolitionOption);
             if (resolutions[i].width == Screen.width && resolutions[i].height == Screen.height)
             {
                 currentResolutionIndex = i;
             }
         }
-        print(options.Count);
         resolutionDropdown.AddOptions(options);
         resolutionDropdown.value = currentResolutionIndex;
     }
