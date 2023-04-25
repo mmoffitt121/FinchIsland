@@ -312,7 +312,7 @@ public class LessonPlanUI : MonoBehaviour
         }
     }
     #endregion
-
+    /*call load lessplanlist and display lessonplans so you can start the scene*/
     private void Start()
     {
         LoadLessonPlanList();

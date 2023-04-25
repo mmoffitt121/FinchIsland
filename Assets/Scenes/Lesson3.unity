@@ -462,7 +462,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -736.49945, y: 399.9999}
+  m_AnchoredPosition: {x: -736.49945, y: 399.99988}
   m_SizeDelta: {x: 1472, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &780512417
@@ -852,7 +852,7 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 5
+          m_IntArgument: 6
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -1731,7 +1731,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1971695122}
   m_Direction: 2
   m_Value: 1.0000005
-  m_Size: 0.773889
+  m_Size: 0.773887
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:

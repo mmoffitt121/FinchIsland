@@ -4,6 +4,7 @@ using System.Linq;
 using TMPro;
 using UnityEngine;
 
+/*class lesson planwrapper */
 public class LessonPlanWrapper : MonoBehaviour
 {
     public LessonPlan lessonPlan;
@@ -15,21 +16,25 @@ public class LessonPlanWrapper : MonoBehaviour
     public GameObject deleteButton;
     public GameObject startButton;
 
+    /*function to delete a lesson plan*/
     public void DeleteLessonPlan()
     {
         FindObjectOfType<LessonPlanUI>().DeleteLessonPlan(lessonPlan);
     }
 
+    /*function to edit a lesson plan*/
     public void EditLessonPlan()
     {
         FindObjectOfType<LessonPlanUI>().EditLessonPlan(lessonPlan);
     }
 
+    /*function to start a lesson plan */
     public void StartLessonPlan()
     {
         LessonPlanScriptor.StartLessonPlan(lessonPlan);
     }
 
+    /*function to display lesson plans on the screen */
     public void SetLessonPlan(LessonPlan lessonPlan)
     {
         this.lessonPlan = lessonPlan;
