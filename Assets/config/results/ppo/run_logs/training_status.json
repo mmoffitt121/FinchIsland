@@ -2,22 +2,22 @@
     "Bird": {
         "checkpoints": [
             {
-                "steps": 2048,
-                "file_path": "results\\ppo\\Bird\\Bird-2048.onnx",
+                "steps": 2560,
+                "file_path": "results\\ppo\\Bird\\Bird-2560.onnx",
                 "reward": null,
-                "creation_time": 1682035563.672277,
+                "creation_time": 1682382405.1080322,
                 "auxillary_file_paths": [
-                    "results\\ppo\\Bird\\Bird-2048.pt"
+                    "results\\ppo\\Bird\\Bird-2560.pt"
                 ]
             }
         ],
         "final_checkpoint": {
-            "steps": 2048,
+            "steps": 2560,
             "file_path": "results\\ppo\\Bird.onnx",
             "reward": null,
-            "creation_time": 1682035563.672277,
+            "creation_time": 1682382405.1080322,
             "auxillary_file_paths": [
-                "results\\ppo\\Bird\\Bird-2048.pt"
+                "results\\ppo\\Bird\\Bird-2560.pt"
             ]
         }
     },

@@ -13,6 +13,7 @@ public class WallNUT : MonoBehaviour
 
     //Start of finding food
 
+    //Uses Vector UP and Center to find it
     public Vector3 wallnutVectorUP
     {
         get
@@ -31,10 +32,10 @@ public class WallNUT : MonoBehaviour
 
 
 
-    //is walnut empty
+    //Check if the  walnut is empty
     public float checkNut { get; private set; }
   
-
+    //Checks the amount in wallnut
     public bool AmountinWalnut
     {
         get
@@ -43,6 +44,7 @@ public class WallNUT : MonoBehaviour
         }
     }
 
+    //Once the bird eats the wallnut, remove part of the food from wallnut
     public float Feed(float amount)
     {
         float eaten = Mathf.Clamp(amount, 0f, checkNut);
@@ -67,6 +69,7 @@ public class WallNUT : MonoBehaviour
 
     }
 
+    //reset the wallnut
     public void ResetNut()
     {
         checkNut = 1f;
@@ -78,6 +81,8 @@ public class WallNUT : MonoBehaviour
         print("food is full");
     }
 
+    
+    //Once it starts
     private void Awake()
     {
         //Finding mesh rendered and  material 

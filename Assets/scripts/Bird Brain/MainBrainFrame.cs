@@ -8,35 +8,43 @@ using UnityEngine;
 
 // This will be the place to set up the values for the bird movement
 public class MainBrainFrame : Agent {
+    // Controls the movemoent of the bird
     public float moveForce = 2f;
     public float pitchSpeed = 100f;
     public float yawSpeed = 100f;
 
+    //Controls the birds beak
     public Transform beakTip;
     public float beakThickness = 0f;
 
     //bird beak thickness (worm = long thin, wallnut = short thick )
 
+    //Controls the movement of the bird
     private float smoothPitchChange = 0f;
     private float smoothYawChange = 0f;
     private const float MaxPitchAngle = 80f;
     private const float BeakTipRadius = 0.1f;
     //we are using the whole bird. Need to add a beak collider
     // private const float beakAngle = 80f;
+
+    //parts of the bird used for testing
     public Camera geraldPOV;
     public bool Testing;
     new private Rigidbody rigidbody;
 
+    //Calling other scripts
     private MainIslandArea islandArea;
     private WallNUT nearestNut;
    // private Worms nearestworm;
 
     private bool frozen = false;
 
+    //checks worms and wallnuts
     public float checkNut { get; private set; }
     public float checkWorm { get; private set; }
    //public float BeakThickness { get => beakThickness; set => beakThickness = value; }
 
+    //starting it up
     public override void Initialize() {
         rigidbody = GetComponent<Rigidbody>();
         islandArea = GetComponentInParent<MainIslandArea>();
@@ -46,6 +54,7 @@ public class MainBrainFrame : Agent {
         }
     }
 
+    //once it starts it runs these
     public override void OnEpisodeBegin() {
         if (Testing) {
             islandArea.ResetNut();
@@ -66,6 +75,7 @@ public class MainBrainFrame : Agent {
             return;
         }
 
+        //actions that the bird does in order to moce during ai training, not user input 
         Vector3 move = new Vector3(actions.ContinuousActions[0], actions.ContinuousActions[1], actions.ContinuousActions[2]);
         rigidbody.AddForce(move * moveForce);
         Vector3 rotationVector = transform.rotation.eulerAngles;
@@ -83,6 +93,7 @@ public class MainBrainFrame : Agent {
         transform.rotation = Quaternion.Euler(pitch, yaw, 0f);
     }
 
+    //how the bird views the world, Observations are vector lines coming out of the bird
     public override void CollectObservations(VectorSensor sensor) {
         if (nearestNut == null) {
             sensor.AddObservation(new float[10]);
@@ -98,7 +109,7 @@ public class MainBrainFrame : Agent {
         sensor.AddObservation(toNut.magnitude / MainIslandArea.AreaDiameter);
     }
 
-    /// Make the bird move
+    /// Make the bird move using user input
     public override void Heuristic(in ActionBuffers actionsOut) {
         var continousActionsOut = actionsOut.ContinuousActions;
         Vector3 forward = Vector3.zero;
@@ -148,7 +159,7 @@ public class MainBrainFrame : Agent {
         rigidbody.WakeUp();
     }
 
-   
+   //Checks for the amout of food in the wallnut and looks for the nearest one to the bird
     private void UpdateNearestNut() {
         foreach (WallNUT wallnut in islandArea.Wallnuts) {
             if (nearestNut == null && wallnut.AmountinWalnut) {
@@ -164,7 +175,10 @@ public class MainBrainFrame : Agent {
             }
         }
     }
-
+    /// <summary>
+    /// Would have been code for the worm if it worked
+    /// </summary>
+    /// <param name="other"></param>
   /*  private void UpdateNearestWorm()
     {
         foreach (Worms worm in islandArea.Worm)
@@ -197,6 +211,7 @@ public class MainBrainFrame : Agent {
 
     }
 
+    //Once the bird collides, it can distinguish between the wallnut and the worm
     private void TriggerEnterOrStay(Collider collider) {
         //Check if colliding with nut, Continues because of Trigger.
 
@@ -231,6 +246,7 @@ public class MainBrainFrame : Agent {
             }
 
         }
+        //this would have been worm food (or Wood), didnt get to work
        /* else if (collider.CompareTag("Wood"))
         {
             Vector3 closestPointToBeakTip = collider.ClosestPoint(beakTip.position);
@@ -267,6 +283,7 @@ public class MainBrainFrame : Agent {
         }*/
     }
 
+    //tags that either dont add a value or remove a reward such as boundary
     private void OnCollisionEnter(Collision collision) {
         if (Testing && collision.collider.CompareTag("SimulationResource"))
         {
@@ -286,6 +303,7 @@ public class MainBrainFrame : Agent {
 
     }
 
+    //makes things smoother
     private void Update() {
         if (nearestNut != null) {
             Debug.DrawLine(beakTip.position, nearestNut.wallnutCenter, Color.green);

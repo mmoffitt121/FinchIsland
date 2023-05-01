@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class MainIslandArea : MonoBehaviour
 {
+    //size of the island
     public const float AreaDiameter = 3f;
 
     //list of all nuts in area with dictionary
@@ -18,6 +19,8 @@ public class MainIslandArea : MonoBehaviour
     //list of all wallnuts
     public List<WallNUT> Wallnuts { get; private set; }
     //public List<Worms> Worm { get; private set; }
+
+    //Resets the wallnuts
     public void ResetNut()
     {
         foreach (GameObject nut in nuts)
@@ -34,6 +37,7 @@ public class MainIslandArea : MonoBehaviour
         }
     }
 
+    //Would Reset the worms
    /* public void ResetWorm()
     {
         foreach (GameObject worm in worms)
@@ -51,6 +55,8 @@ public class MainIslandArea : MonoBehaviour
     }
 
     */
+
+    //How it finds food
     public WallNUT GetFood (Collider collider)
     {
           return nutDictionary[collider];
@@ -61,6 +67,8 @@ public class MainIslandArea : MonoBehaviour
         return wormDictionary[collider];
     }
    */
+
+    //Once it starts for both Awake and Start
     private void Awake()
     {
         nuts = new List<GameObject>();
@@ -77,7 +85,7 @@ public class MainIslandArea : MonoBehaviour
         FindChildFood(transform);
     }
 
-
+    //Finds all the food that is a child of the island
     public void FindChildFood (Transform parent)
     {
         for(int i = 0; i < parent.childCount; i++)

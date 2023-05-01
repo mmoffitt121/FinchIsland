@@ -9,6 +9,8 @@ public class Worms : MonoBehaviour
     public Collider WormBloker;
     public Material wormMaterial;
 
+
+    //How the bird finds food, Vector Up and Center
     public Vector3 wormVectorUP
     {
         get
@@ -24,9 +26,11 @@ public class Worms : MonoBehaviour
             return WormCollider.transform.position;
         }
     }
+
+    //Makes sure food is in worm
     public float checkWorm { get; private set; }
 
-
+    //Checks the amount of food in worm
     public bool AmountinWorm
     {
         get
@@ -35,6 +39,7 @@ public class Worms : MonoBehaviour
         }
     }
 
+    //Once the bird eats, remove values from worm
     public float Feed(float amount)
     {
         float eaten = Mathf.Clamp(amount, 0f, checkWorm);
@@ -49,6 +54,7 @@ public class Worms : MonoBehaviour
 
     }
 
+    //resets the worm
     public void ResetWorm()
     {
         checkWorm = 1f;
@@ -57,6 +63,7 @@ public class Worms : MonoBehaviour
         print("worm food is full");
     }
 
+    //Once it starts
     private void Awake()
     {
         MeshRenderer meshRenderer = GetComponent<MeshRenderer>();
